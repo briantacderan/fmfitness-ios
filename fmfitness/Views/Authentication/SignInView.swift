@@ -19,7 +19,7 @@ struct SignInView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     LogoButton()
-                        .foregroundColor(Color("csf-main"))
+                        .foregroundColor(.white)
                 }
             }
         }

@@ -11,7 +11,7 @@ import XCTest
 class ProfileTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDownWithError() throws {
@@ -19,11 +19,7 @@ class ProfileTests: XCTestCase {
     }
 
     func testProfileEmail() throws {
-        let profile = Profile(email: "new_profile@email.com",
-                              prefersNotifications: true,
-                              seasonalPhoto: "☃️",
-                              nextAppointment: Date(),
-                              _username: "new_profile")
+        let profile = Profile.default
         XCTAssertEqual(profile.email, "new_profile@email.com")
         XCTAssertEqual(profile._username, "new_profile")
     }

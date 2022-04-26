@@ -14,4 +14,6 @@ enum Page {
     case registerPage
     case homePage
     case rsvpPage
+    case adminPage
+    case billingsPage
 }

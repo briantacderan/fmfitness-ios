@@ -86,6 +86,11 @@
             value = "pk_test_51HQ8I2ACW0I7VcyqNeiL1rZVLiQrUqOqOpW1e6j3JlflQV1JoMac7DpPJhMoKxQUaGBia9cV9X3F3IECQdc7LEeA00sRSWvntv"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "STRIPE_SECRET_KEY"
+            value = "sk_test_51HQ8I2ACW0I7VcyqE8Lv5tdYkLYp0OrUcDjRjCSr55oP5t5HbSXzWKzZoWjjdPd5pGlkIeycssRhS02T5ZIEbiLR00Hn1DqUZs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

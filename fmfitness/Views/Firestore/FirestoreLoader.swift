@@ -19,11 +19,20 @@ final class FirestoreLoader: ObservableObject {
     private lazy var baseUrlString: String? = { "https://firestore.googleapis.com/v1/projects/fmfitness-bb6e6/databases/(default)/documents/profile/\(self.email)"
     }()
     
+    private lazy var apptUrlString: String? = { "https://firestore.googleapis.com/v1/projects/fmfitness-bb6e6/databases/(default)/documents/appointment/\(self.email)"
+    }()
+    
     private let profileSubject = PassthroughSubject<Profile, Error>()
+    private let apptSubject = PassthroughSubject<Appointment, Error>()
 
     private lazy var components: URLComponents? = {
-        var comps = URLComponents(string: baseUrlString!)
-        return comps
+        if email != "" {
+            var comps = URLComponents(string: baseUrlString!)
+            return comps
+        } else {
+            var comps = URLComponents(string: apptUrlString!)
+            return comps
+        }
     }()
 
     private lazy var request: URLRequest? = {
@@ -48,9 +57,10 @@ final class FirestoreLoader: ObservableObject {
 
     private func sessionWithFreshToken(completion: @escaping (Result<URLSession, Error>) -> Void) {
         let authentication = GIDSignIn.sharedInstance.currentUser?.authentication
-        authentication?.do { auth, error in
+        authentication?.do { [self] auth, error in
             guard let token = auth?.accessToken else {
                 completion(.failure(.couldNotCreateURLSession(error)))
+                print(components?.url ?? "No URL available")
                 return
             }
             let configuration = URLSessionConfiguration.default
@@ -94,6 +104,34 @@ final class FirestoreLoader: ObservableObject {
             }
         }
     }
+    
+    func appointmentPublisher(completion: @escaping (AnyPublisher<Appointment, Error>) -> Void) {
+        sessionWithFreshToken { [weak self] result in
+            switch result {
+            case .success(let authSession):
+                guard let request = self?.request else {
+                    return completion(Fail(error: .couldNotCreateURLRequest).eraseToAnyPublisher())
+                }
+                let apptPublisher = authSession.dataTaskPublisher(for: request)
+                    .tryMap { data, error -> Appointment in
+                        let decoder = JSONDecoder()
+                        let apptResponse = try decoder.decode(AppointmentResponse.self, from: data)
+                        return apptResponse.appointment
+                    }
+                    .mapError { error -> Error in
+                        guard let loaderError = error as? Error else {
+                            return Error.couldNotFetchAppointment(underlying: error)
+                        }
+                        return loaderError
+                    }
+                    .receive(on: DispatchQueue.main)
+                    .eraseToAnyPublisher()
+                completion(apptPublisher)
+            case .failure(let error):
+                completion(Fail(error: error).eraseToAnyPublisher())
+            }
+        }
+    }
 }
 
 extension FirestoreLoader {
@@ -103,5 +141,6 @@ extension FirestoreLoader {
         case couldNotCreateURLRequest
         case userHasNoProfile
         case couldNotFetchProfile(underlying: Swift.Error)
+        case couldNotFetchAppointment(underlying: Swift.Error)
     }
 }

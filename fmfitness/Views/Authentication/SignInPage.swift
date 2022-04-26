@@ -16,8 +16,6 @@ struct SignInPage: View {
     @ObservedObject var authViewModel = AuthenticationViewModel.shared
     
     @State var showRegister = false
-    @State var windowHeight = 435
-    @State var windowWidth = 375
     
     @State var email: String = ""
     @State var password: String = ""
@@ -64,18 +62,14 @@ struct SignInPage: View {
                                         LoginButtonContent(isProcessing: signInProcessing)
                                     }
                                     .disabled(!signInProcessing && !email.isEmpty && !password.isEmpty ? false : true)
-                                    .padding(.leading)
+                                    .padding(.leading, 25)
                                     .transition(.move(edge: .trailing))
                                     
-                                    Text("or")
-                                        .padding(.leading, 5)
-                                    
                                     GoogleSignInButtonWrapper(handler: authViewModel.signIn)
-                                        .accessibility(hint: Text("Sign in with Google button."))
-                                        .frame(width: 42, height: 44)
-                                        .cornerRadius(2)
-                                        .padding(.leading, 5)
-                                        .offset(y: -3)
+                                        .accessibility(hint: Text("Sign in with Google button"))
+                                        .padding()
+                                        .frame(width: 170, height: 75)
+                                        .cornerRadius(10)
                                     
                                     Spacer()
                                 }
@@ -84,21 +78,16 @@ struct SignInPage: View {
                                 
                                 HStack {
                                     Spacer()
-                                    
                                     Text("Not a member? ")
                                         .font(Font.custom("BebasNeue", size: 25))
                                         .foregroundColor(.black)
-                                    
-                                    
                                     Button {
                                         showRegister.toggle()
                                     } label: {
                                         Text("Sign Up")
+                                            .font(Font.custom("BebasNeue", size: 30))
+                                            .foregroundColor(Color("csf-earth"))
                                     }
-                                    .font(Font.custom("BebasNeue", size: 30))
-                                    .foregroundColor(Color("csf-earth"))
-                                    
-                                    Spacer()
                                     Spacer()
                                 }
                                 .padding(.bottom, 20)
@@ -107,7 +96,7 @@ struct SignInPage: View {
                                 }
                             }
                             .padding(.leading)
-                            .frame(width: CGFloat(windowWidth), height: CGFloat(windowHeight))
+                            .frame(width: CGFloat(375), height: CGFloat(425))
                             .transition(.move(edge: .trailing))
                             .background(.thinMaterial)
                             .foregroundColor(.gray)
@@ -125,19 +114,16 @@ struct SignInPage: View {
                     .frame(width: 375, height: 500)
                     .offset(y: -15)
                 }
-                .background(Image("cleans-silho")
+                /*.background(Image("cleans-silho")
                                 .resizable()
                                 .frame(width: 600, height: 850)
                                 .tint(.gray)
                                 .offset(x: -141, y: 30)
                                 .blur(radius: 10)
-                )
+                )*/
             }
-            .background(Image("chilkoottrail")
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                            .blur(radius: 30)
-                            .ignoresSafeArea())
+            .background(Color("LaunchScreenBackground")
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         } else {
             ZStack {
                 VStack {
@@ -157,7 +143,7 @@ struct SignInPage: View {
                     
                     VStack {
                         Spacer()
-                        HStack {
+                        VStack {
                             Button(action: {
                                 signInUser(userEmail: email,
                                            userPassword: password)
@@ -249,7 +235,7 @@ struct SignInPage_Previews: PreviewProvider {
     static var previews: some View {
         SignInPage()
             .previewInterfaceOrientation(.portrait)
-//            .preferredColorScheme(.dark)
+            .preferredColorScheme(.dark)
     }
 }
 
@@ -258,7 +244,7 @@ struct FlatGlassView: ViewModifier {
         if #available(iOS 15.0, *) {
             content
                 .padding()
-                .frame(height: 65)
+                .frame(height: 45)
                 .background(.ultraThinMaterial)
                 .cornerRadius(10)
         } else {
@@ -301,7 +287,7 @@ struct ConcaveGlassView: ViewModifier {
         if #available(iOS 15.0, *) {
             content
                 .padding()
-                .frame(width: 355, height: 65)
+                .frame(width: 355, height: 45)
                 .background(.ultraThinMaterial)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
@@ -320,7 +306,7 @@ struct ConcaveGlassView: ViewModifier {
             // Fallback on earlier versions
             content
                 .padding()
-                .frame(width: 325, height: 60)
+                .frame(width: 325, height: 45)
                 .cornerRadius(14)
                 .shadow(color: .white, radius: 3, x: -3, y: -3)
                 .shadow(color: .black, radius: 3, x: 3, y: 3)
@@ -352,7 +338,7 @@ fileprivate struct SignInCredentialFields: View {
         Group {
             TextField("Email", text: $email)
                 .padding(20)
-                .font(Font.custom("BebasNeue", size: 25))
+                .padding(.top, 50)
                 .frame(width: 270, height: 55)
                 .padding(.trailing, 70)
                 .background(.thinMaterial)
@@ -361,7 +347,6 @@ fileprivate struct SignInCredentialFields: View {
                 .textInputAutocapitalization(.never)
             SecureField("Password", text: $password)
                 .padding(20)
-                .font(Font.custom("BebasNeue", size: 25))
                 .frame(width: 270, height: 55)
                 .padding(.trailing, 70)
                 .background(.thinMaterial)
@@ -379,13 +364,13 @@ fileprivate struct LoginButtonContent: View {
             ProgressView()
                 .padding()
                 .frame(width: 180, height: 45)
-                .background(Color("csb-sheet"))
+                .background(Color("csf-earth"))
                 .cornerRadius(10)
                 .modifier(ConvexGlassView())
         } else {
             Text("LOGIN")
                 .font(Font.custom("BebasNeue", size: 40))
-                .foregroundColor(Color("csf-accent"))
+                .foregroundColor(Color("csf-main"))
                 .padding()
                 .frame(width: 180, height: 85)
                 .background(Color("csb-main"))

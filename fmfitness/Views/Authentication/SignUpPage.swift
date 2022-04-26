@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServices
 import Firebase
 
 extension AnyTransition {
@@ -18,6 +19,7 @@ extension AnyTransition {
 struct SignUpPage: View {
 
     @ObservedObject var firestore = FirestoreManager.shared
+    @ObservedObject var cloud = CloudManager.shared
     
     @State var username = ""
     @State var email = ""
@@ -28,7 +30,6 @@ struct SignUpPage: View {
     @State var signUpErrorMessage = ""
     
     @State var registrationDidSucceed = false
-    
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -64,8 +65,9 @@ struct SignUpPage: View {
                 
                 Button(action: {
                     signUpUser(userEmail: email, userPassword: password)
+                    //signUpStripe(userEmail: email)
                     withAnimation {
-                        firestore.next(newPage: .homePage)
+                        firestore.next(newPage: .welcomePage)
                     }
                 }) {
                     SignUpButtonContent(isProcessing: signUpProcessing)
@@ -75,7 +77,6 @@ struct SignUpPage: View {
                 Spacer()
             }
             .padding()
-            .transition(.move(edge: .leading))
             
             if registrationDidSucceed {
                 SignUpSuccessView()
@@ -86,11 +87,11 @@ struct SignUpPage: View {
                 .frame(width: 75, height: 5)
                 .padding(10)
         }
-        .background(Image("turtlerock")
-                        .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .blur(radius: 50)
-                        .ignoresSafeArea())
+        .background(Color("LaunchScreenBackground"))
+        .frame(width: UIScreen.main.bounds.width,
+               height: UIScreen.main.bounds.height)
+        .blur(radius: 50)
+        .brightness(-0.35)
         .preferredColorScheme(.dark)
     }
     
@@ -111,15 +112,35 @@ struct SignUpPage: View {
                 print("Could not create account")
                 signUpProcessing = false
             case .some(_):
+                firestore.setProfile(parameters: ["email": userEmail, "isAdmin": false, "striped": false, "currentLevel": Profile.Level.nine.rawValue, "balanceDue": 0, "acctNum": "new", "timeslot": Date(), "focusTarget": Profile.Focus.tb.rawValue, "username": userEmail.components(separatedBy: "@")[0]])
                 print("User created")
                 
-                signUpProcessing = false
                 signUpErrorMessage = ""
                 registrationDidSucceed = true
-                
+                signUpProcessing = false
+            }
+        }
+    }
+    
+    func signUpStripe(userEmail: String) {
+        cloud.createStripeConnectAccount(email: firestore.profile.email) { acctNum, error in
+            guard error == nil else {
+                print("Could not set up Stripe account #: \(error!)")
+                firestore.currentPage = .loginPage
+                return
+            }
+            
+            switch acctNum {
+            case .none:
+                print("Could not create Stripe Connect account")
                 withAnimation {
                     firestore.next(newPage: .loginPage)
                 }
+            case .some(_):
+                print("Stripe Connect account created: \(acctNum!)")
+                
+                firestore.fetchProfile(email: userEmail)
+                firestore.setProfile(parameters: ["acctNum": acctNum!, "email": userEmail])
             }
         }
     }
@@ -151,16 +172,14 @@ struct SignUpButtonContent: View {
                 .frame(width: 220, height: 45)
                 .background(.black)
                 .cornerRadius(15.0)
-                .modifier(ConvexGlassView())
         } else {
             Text("SIGN UP")
                 .font(Font.custom("BebasNeue", size: 35))
                 .foregroundColor(.white)
                 .padding()
                 .frame(width: 220, height: 45)
-                .background(.black)
+                .background(Color("csf-earth"))
                 .cornerRadius(15.0)
-                .modifier(ConvexGlassView())
         }
     }
 }
@@ -175,26 +194,23 @@ struct SignUpCredentialFields: View {
         Group {
             TextField("Email", text: $email)
                 .padding(20)
-                .font(Font.custom("BebasNeue", size: 30))
                 .foregroundColor(.black)
-                .frame(width: 325, height: 65)
+                .frame(width: 325, height: 45)
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
 
             SecureField("Password", text: $password)
                 .padding(20)
-                .font(Font.custom("BebasNeue", size: 25))
                 .foregroundColor(.black)
-                .frame(width: 325, height: 65)
+                .frame(width: 325, height: 45)
                 .background(.thinMaterial)
                 .cornerRadius(10)
 
             SecureField("Confirm Password", text: $passwordConfirmation)
                 .padding(20)
-                .font(Font.custom("BebasNeue", size: 25))
-                .foregroundColor(.black)
-                .frame(width: 325, height: 65)
+                .foregroundColor(Color("csf-main"))
+                .frame(width: 325, height: 45)
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .border(Color.red, width: passwordConfirmation != password ? 1 : 0)
@@ -208,9 +224,25 @@ struct SignUpSuccessView: View {
         Text("Registration completed")
             .font(.headline)
             .frame(width: 250, height: 80)
-            .background(Color.green)
+            .background(Color("csf-earth"))
             .cornerRadius(20.0)
             .foregroundColor(.white)
             .animation(.easeIn, value: true)
     }
 }
+
+/*struct SafariView: UIViewControllerRepresentable {
+
+    let url: URL
+    if url == safariView([isSecureField("Password", text: $password)])
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
+
+    }
+
+}*/
+

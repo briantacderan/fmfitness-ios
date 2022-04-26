@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tab = UITabBarAppearance()
     let navBar = UINavigationBar.appearance()
     
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         
@@ -45,15 +46,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var stripeHandled: Bool
         stripeHandled = StripeAPI.handleURLCallback(with: url)
         if (stripeHandled) {
+            /* Process the URL
+            guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+                  let stripePath = components.path,
+                  let params = components.queryItems else {
+                      print("Invalid URL or album path missing")
+                      return false
+            }
+                
+                
+            }
+            
+            let message = url.host?.removingPercentEncoding
+            if message == "Back to FM Fitness" {
+                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            } else {
+                
+            }
+            
+            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+            alertController.addAction(okAction)
+            
+            let rootViewController = UIApplication.shared.windows.first?.rootViewController
+            rootViewController!.present(alertController, animated: true, completion: nil)*/
+            
             return true
         }
 
         /// If not handled by this app, return false.
         return false
     }
+    
+    /// This method handles opening universal link URLs (for example, "https://example.com/stripe_ios_callback")
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool  {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            if let url = userActivity.webpageURL {
+                let stripeHandled = StripeAPI.handleURLCallback(with: url)
+                if (stripeHandled) {
+                    return true
+                } else {
+                    // This was not a Stripe url – handle the URL normally as you would
+                }
+            }
+        }
+        return false
+    }
 
+    
+    
     // MARK: - Application Appearance
-
     private func configureApplicationAppearance() {
         tab.configureWithOpaqueBackground()
         // tab.backgroundColor = UIColor(Color("csb-main"))
@@ -65,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBar.clipsToBounds = true
         
         navBar.tintColor = .systemOrange
+        navBar.barTintColor = UIColor(Color("csb-main"))
         
         // NavigationBarTitle
         navBar.largeTitleTextAttributes = [

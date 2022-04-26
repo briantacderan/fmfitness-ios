@@ -10,20 +10,37 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var firestore = FirestoreManager.shared
-    @ObservedObject var authViewModel = AuthenticationViewModel.shared
     
     var body: some View {
         switch firestore.currentPage {
         case .welcomePage:
-            WelcomeView()
+            withAnimation {
+                WelcomeView()
+            }
         case .homePage:
-            HomeView(selection: .home)
+            withAnimation {
+                HomeBase(selection: .home)
+            }
         case .loginPage:
-            SignInView()
+            withAnimation {
+                SignInView() 
+            }
         case .registerPage:
-            SignUpView()
+            withAnimation {
+                SignUpView()
+            }
         case .rsvpPage:
-            HomeView(selection: .schedule)
+            withAnimation {
+                HomeBase(selection: .schedule)
+            }
+        case .adminPage:
+            withAnimation {
+                HomeBase(selection: .admin)
+            }
+        case .billingsPage:
+            withAnimation {
+                HomeBase(selection: .billings)
+            }
         }
     }
 }
@@ -31,7 +48,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(AuthenticationViewModel.shared)
             .environmentObject(FirestoreManager.shared)
     }
 }

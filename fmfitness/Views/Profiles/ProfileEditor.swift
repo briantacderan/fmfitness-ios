@@ -34,32 +34,48 @@ struct ProfileEditor: View {
                 backgroundGradient
                     .offset(y: 75)
                     .overlay(
-                        List {
-                            HStack {
-                                Text("Username").bold()
-                                Divider()
-                                TextField("Username", text: Binding($profile._username)!)
-                            }
-                            
-                            Toggle(isOn: $profile.prefersNotifications) {
-                                Text("Enable Notifications").bold()
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 20) {
-                                Text("Workout team").bold()
-                                
-                                Picker("Readiness", selection: $profile.seasonalPhoto) {
-                                    ForEach(Profile.Season.allCases) { season in
-                                        Text(season.rawValue).tag(season)
-                                    }
+                        Form {
+                            Section {
+                                HStack {
+                                    Text("Username").bold()
+                                    Divider()
+                                    TextField("Username", text: Binding($profile._username)!)
+                                        .font(Font.custom("Rajdhani Medium", size: 15))
+                                        .multilineTextAlignment(.trailing)
                                 }
-                                .pickerStyle(.segmented)
                             }
                             
-                            DatePicker(selection: $profile.nextAppointment,
-                                       in: dateRange,
-                                       displayedComponents: .date) {
-                                Text("Schedule a Workout Session").bold()
+                            Section {
+                                HStack {
+                                    Text("Target focus").bold()
+                                    Divider()
+                                    Spacer()
+                                    Picker("Target focus", selection: $profile.focusTarget) {
+                                        ForEach(Profile.Focus.allCases) { focus in
+                                            Text((focus.rawValue == "total-body" ? focus.rawValue.replacingOccurrences(of: "-", with:" ") : focus.rawValue.replacingOccurrences(of: "-", with:" + ")))
+                                                .tag(focus)
+                                                .font(Font.custom("Rajdhani", size: 15))
+                                                .foregroundColor(Color("csf-main"))
+                                        }
+                                    }
+                                    .pickerStyle(MenuPickerStyle())
+                                    .accentColor(Color("csf-main"))
+                                }
+                            }
+                            
+                            Section {
+                                VStack(alignment: .leading, spacing: 20) {
+                                    Text("Recovery status").bold()
+                                    
+                                    Picker("Readiness", selection: $profile.currentLevel) {
+                                        ForEach(Profile.Level.allCases) { level in
+                                            Text(level.rawValue)
+                                                .tag(level)
+                                        }
+                                    }
+                                    .padding(5)
+                                    .pickerStyle(.segmented)
+                                }
                             }
                         }
                     )

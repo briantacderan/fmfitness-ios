@@ -18,7 +18,7 @@ struct SchedulerView: View {
     @State private var timeConfirmed = false
     
     @State var items: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -36,20 +36,18 @@ struct SchedulerView: View {
                                             Label("Profile", systemImage: "person.crop.square")
                                         }
                                         .font(Font.custom("BebasNeue", size: 20))
-                                        .foregroundColor(Color("csf-earth"))
-                                        .padding(.top, 5)
-                                        .padding(.leading, 5)
+                                        .foregroundColor(Color("csf-gray"))
+                                        .padding(3)
                                         
                                         Spacer()
                                     }
                                     
                                     HStack {
                                         Spacer()
+                                        Spacer()
                                         SchedulerTitle()
                                             .ignoresSafeArea(.all)
-                                        Spacer()
                                     }
-                                    .padding(.vertical)
                                     
                                     Divider()
                                     
@@ -84,24 +82,27 @@ struct SchedulerView: View {
                             if !dayConfirmed && weekConfirmed {
                                 VStack {
                                     HStack {
-                                        Button("◀︎ BACK") {
+                                        Button {
                                             withAnimation(.easeInOut(duration: 0.35)) {
                                                 weekConfirmed.toggle()
                                             }
+                                        } label: {
+                                            Label("", systemImage: "chevron.backward.circle.fill")
                                         }
-                                        .font(.headline)
-                                        .foregroundColor(Color("csf-earth"))
+                                        .font(Font.custom("BebasNeue", size: 30))
+                                        .foregroundColor(Color("csf-gray"))
+                                        .padding(.top, 0)
+                                        .padding(.leading, 5)
 
                                         Spacer()
                                     }
                                     
                                     HStack {
                                         Spacer()
+                                        Spacer()
                                         SchedulerTitle()
                                             .ignoresSafeArea(.all)
-                                        Spacer()
                                     }
-                                    .padding(.vertical)
                                     
                                     Divider()
                                     
@@ -135,37 +136,51 @@ struct SchedulerView: View {
                             if dayConfirmed && weekConfirmed && !timeConfirmed {
                                 VStack {
                                     HStack {
-                                        Button("◀︎ BACK") {
+                                        Button {
                                             withAnimation(.easeInOut(duration: 0.35)) {
                                                 dayConfirmed.toggle()
                                             }
+                                        } label: {
+                                            Label("", systemImage: "chevron.backward.circle.fill")
                                         }
-                                        .font(.headline)
-                                        .foregroundColor(Color("csf-earth"))
+                                        .font(Font.custom("BebasNeue", size: 30))
+                                        .foregroundColor(Color("csf-gray"))
+                                        .padding(.top, 0)
+                                        .padding(.leading, 5)
 
                                         Spacer()
                                     }
                                     
                                     HStack {
                                         Spacer()
-                                        
+                                        Spacer()
                                         VStack(spacing: -10) {
-                                            Text("RESERVING TIME")
+                                            Text("RESERVING")
                                                 .font(Font.custom("BebasNeue", size: 40))
-                                            Text("on")
+                                            Text("timeslot for")
                                                 .font(Font.custom("BebasNeue", size: 20))
                                                 .padding(.bottom, 10)
-                                            Text(scheduler.timeFinal)
-                                                .font(Font.custom("BebasNeue", size: 35))
-                                                .foregroundColor(Color("csf-main"))
                                         }
-                                        .ignoresSafeArea(.all)
-                                        
-                                        Spacer()
                                     }
-                                    .padding(.vertical)
                                     
                                     Divider()
+                                    
+                                    HStack {
+                                        if let timeTable = scheduler.timeFinal.components(separatedBy: ", ") {
+                                            ForEach(timeTable.indices) { (index: Int) in
+                                                if index < timeTable.count - 1 {
+                                                    Text("\(timeTable[index]),")
+                                                        .font(Font.custom("BebasNeue", size: 35))
+                                                        .foregroundColor(Color("csf-main"))
+                                                } else {
+                                                    Text(timeTable[index])
+                                                        .font(Font.custom("BebasNeue", size: 40))
+                                                        .foregroundColor(Color("csf-earth"))
+                                                }
+                                            }
+                                            .ignoresSafeArea(.all)
+                                        }
+                                    }
                                     
                                     Spacer()
                                     
@@ -175,9 +190,10 @@ struct SchedulerView: View {
                                                 scheduler.timeIndex = index
                                             }) {
                                                 TimesListView(activeTime: $scheduler.timeIndex, label: self.scheduler.timeArray[index], idx: index)
-                                                    .foregroundColor(Color("csf-earth"))
+                                                    .foregroundColor(.clear)
                                             }
-                                            .cornerRadius(14)
+                                            .cornerRadius(10)
+                                            .aspectRatio(0.8, contentMode: .fit)
                                         }
                                     }
                                     
@@ -185,9 +201,10 @@ struct SchedulerView: View {
                                     Spacer()
                                     
                                     Button(action: {
+                                        
+                                        firestore.setTraining(parameters: ["timeslot": scheduler.trainingTime, "email": firestore.profile.email])
+                                        firestore.fetchProfile(email: firestore.profile.email)
                                         withAnimation(.easeInOut(duration: 0.35)) {
-                                            firestore.setTraining(timeslot: scheduler.trainingTime, email: firestore.profile.email)
-                                            firestore.fetchProfile(email: firestore.profile.email)
                                             timeConfirmed.toggle()
                                         }
                                     }) {
@@ -202,7 +219,7 @@ struct SchedulerView: View {
                             if dayConfirmed && weekConfirmed && timeConfirmed {
                                 VStack {
                                     HStack {
-                                        Button("HOME") {
+                                        Button {
                                             withAnimation(.easeInOut(duration: 0.35)) {
                                                 scheduler.resetScheduler()
                                                 dayConfirmed.toggle()
@@ -210,9 +227,13 @@ struct SchedulerView: View {
                                                 timeConfirmed.toggle()
                                                 firestore.next(newPage: .homePage)
                                             }
+                                        } label: {
+                                            Label("", systemImage: "house.circle.fill")
                                         }
-                                        .font(.headline)
-                                        .foregroundColor(Color("csf-earth"))
+                                        .font(Font.custom("BebasNeue", size: 30))
+                                        .foregroundColor(Color("csf-gray"))
+                                        .padding(.top, 0)
+                                        .padding(.leading, 5)
 
                                         Spacer()
                                     }
@@ -237,7 +258,7 @@ struct SchedulerView: View {
                                     Spacer()
                                     Text(scheduler.timeFinal)
                                         .font(Font.custom("BebasNeue", size: 45))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("csf-main"))
                                         .multilineTextAlignment(.center)
                                     
                                     Spacer()
@@ -250,7 +271,7 @@ struct SchedulerView: View {
                         .background(.ultraThinMaterial)
                         .foregroundColor(Color.primary.opacity(0.35))
                         .foregroundStyle(.ultraThinMaterial)
-                        .cornerRadius(35)
+                        .cornerRadius(25)
                         .padding()
                     }
                     .sheet(isPresented: $firestore.showingProfile) {
@@ -258,24 +279,24 @@ struct SchedulerView: View {
                     }
                 }
                 .frame(width: 305, height: 475)
-                .background(Color(UIColor.systemGray6))
+                .background(.clear)
             }
-            .background(.white)
+            .background(.clear)
             .frame(width: UIScreen.main.bounds.width,
                    height: UIScreen.main.bounds.height)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     MenuButton()
-                        .foregroundColor(Color("csf-gray"))
+                        .foregroundColor(Color("csb-main-gray"))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     LogoButton()
-                        .foregroundColor(Color("csf-accent"))
+                        .foregroundColor(Color("csb-main-gray"))
                 }
             }
-            .background(Color("csb-main"))
+            .background(SideBackground())
+            //.background(Color("csb-main"))
             .offset(y: -60)
-            .transition(.moveFromBottom)
         }
     }
 }
@@ -283,7 +304,7 @@ struct SchedulerView: View {
 struct SchedulerView_Previews: PreviewProvider {
     static var previews: some View {
         SchedulerView()
-            //.preferredColorScheme(.dark)
+            .preferredColorScheme(.dark)
     }
 }
 
@@ -319,19 +340,21 @@ struct SchedulerTitle: View {
                 .font(Font.custom("BebasNeue", size: 50))
                 .foregroundColor(Color("csf-main"))
             Text("Personal Training")
-                .font(Font.custom("BebasNeue", size: 40))
+                .font(Font.custom("BebasNeue", size: 25))
         }
     }
 }
 
 struct NextButtonContent: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
         Text("NEXT ▶︎")
             .font(Font.custom("BebasNeue", size: 35))
-            .foregroundColor(Color("csf-main"))
+            .foregroundColor(colorScheme == .dark ? .white : Color("csb-choice"))
             .padding()
             .frame(width: 180, height: 60)
-            .background(Color("csb-main"))
+            .background(colorScheme == .dark ? Color("csb-choice") : .white)
             .cornerRadius(10)
             .modifier(SchedButtonMod())
             .padding(.bottom, 30)
@@ -339,19 +362,23 @@ struct NextButtonContent: View {
 }
 
 struct ShowButtonContent: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
-        Text("Show Times")
-            .font(Font.custom("BebasNeue", size: 35))
-            .foregroundColor(Color("csf-main"))
+        Text("Show Availability")
+            .font(Font.custom("BebasNeue", size: 25))
+            .foregroundColor(colorScheme == .dark ? .white : Color("csb-choice"))
             .padding()
             .frame(width: 180, height: 60)
-            .background(Color("csb-main"))
+            .background(colorScheme == .dark ? Color("csb-choice") : .white)
             .cornerRadius(10)
             .modifier(SchedButtonMod())
     }
 }
 
 struct TimesListView: View {
+    
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Binding var activeTime: Int
     let label: String
     let idx: Int
@@ -359,12 +386,12 @@ struct TimesListView: View {
     var body: some View {
         Text(label)
             .font(Font.custom("BebasNeue", size: 25))
-            .foregroundColor(Color("csf-earth"))
+            .foregroundColor(colorScheme == .dark ? .white : Color("csb-choice"))
             .padding()
             .background(.ultraThinMaterial)
             .overlay(
                 LinearGradient(colors: [.clear, .white.opacity(0.2)], startPoint: .top, endPoint: .bottom))
-            .cornerRadius(14)
+            .cornerRadius(9)
             .shadow(color: .white.opacity(0.65), radius: 1, x: -1, y: -2)
             .shadow(color: .black.opacity(0.65), radius: 2, x: 2, y: 2)
             .onTapGesture { self.activeTime = self.idx }
@@ -378,26 +405,29 @@ struct TimeBorder: View {
     var body: some View {
         withAnimation(.easeIn(duration: 0.6)) {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(lineWidth: 6.0).foregroundColor(show ? Color("csf-accent") : Color.clear)
-                .background(show ? .black : Color("csb-main"))
+                .stroke(lineWidth: 6.0).foregroundColor(show ? Color("csb-choice") : .white)
+                .background(show ? Color("csb-main") : Color("csb-choice"))
         }
     }
 }
 
 struct ConfirmButtonContent: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
         Text("CONFIRM")
             .font(Font.custom("BebasNeue", size: 35))
-            .foregroundColor(Color("csf-main"))
+            .foregroundColor(colorScheme == .dark ? Color("csb-main") : Color("csb-choice"))
             .padding()
             .frame(width: 180, height: 60)
-            .background(Color("csb-main"))
+            .background(colorScheme == .dark ? Color("csf-accent") : Color("csb-main"))
             .cornerRadius(10)
             .modifier(SchedButtonMod())
     }
 }
 
 struct SelectionGlassView: ViewModifier {
+    
     func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {
             content
@@ -405,12 +435,12 @@ struct SelectionGlassView: ViewModifier {
                 .frame(width: 325, height: 60)
                 .background(.ultraThinMaterial)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 14)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(.linearGradient(colors:[.black,.white.opacity(0.75)], startPoint: .top, endPoint: .bottom), lineWidth: 2)
                         .blur(radius: 2)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 14)
+                    RoundedRectangle(cornerRadius: 10)
                         .stroke(.radialGradient(Gradient(colors: [.clear,.black.opacity(0.1)]), center: .bottomLeading, startRadius: 300, endRadius: 0), lineWidth: 15)
                         .offset(y: 5)
                 )
@@ -420,7 +450,7 @@ struct SelectionGlassView: ViewModifier {
             content
                 .padding()
                 .frame(width: 325, height: 60)
-                .cornerRadius(14)
+                .cornerRadius(10)
                 .shadow(color: .white, radius: 3, x: -3, y: -3)
                 .shadow(color: .black, radius: 3, x: 3, y: 3)
         }
@@ -431,6 +461,6 @@ struct HighlightChoice: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(width: UIScreen.main.bounds.size.width/1.25, height: 65)
-            .foregroundColor(Color("csf-earth"))
+            .foregroundColor(Color("csf-accent"))
     }
 }

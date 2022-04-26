@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F234168F27EDBB6D009F296D /* StripePay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234168E27EDBB6D009F296D /* StripePay.swift */; };
+		F22F28E92807E7590062BD10 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F28E82807E7590062BD10 /* HomeView.swift */; };
+		F22F28ED280901CE0062BD10 /* AdminPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F28EC280901CE0062BD10 /* AdminPage.swift */; };
+		F22F28EF280901D90062BD10 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F28EE280901D90062BD10 /* AdminView.swift */; };
+		F22F28F1280907AC0062BD10 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F28F0280907AC0062BD10 /* Appointment.swift */; };
 		F24C59BD27E7377900495E79 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24C59BC27E7377900495E79 /* SignInView.swift */; };
 		F24C59BF27E738A100495E79 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24C59BE27E738A100495E79 /* SignUpView.swift */; };
 		F258191C27DD9D34000F74FA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F258191B27DD9D34000F74FA /* GoogleSignIn */; };
-		F258191F27DD9E32000F74FA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F258191E27DD9E32000F74FA /* FirebaseAnalytics */; };
-		F258192127DD9E32000F74FA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F258192027DD9E32000F74FA /* FirebaseAuth */; };
-		F258192327DD9E32000F74FA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F258192227DD9E32000F74FA /* FirebaseFirestore */; };
 		F26DF7E527A1B22F00AC0555 /* GoogleSignInAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26DF7E427A1B22F00AC0555 /* GoogleSignInAuthenticator.swift */; };
 		F26DF7E727A1B29C00AC0555 /* GoogleSignInButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26DF7E627A1B29C00AC0555 /* GoogleSignInButtonWrapper.swift */; };
 		F26DF7E927A1B36000AC0555 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26DF7E827A1B36000AC0555 /* AuthenticationViewModel.swift */; };
@@ -21,12 +21,22 @@
 		F26DF7ED27A1B89E00AC0555 /* ProfileImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26DF7EC27A1B89E00AC0555 /* ProfileImageLoader.swift */; };
 		F271259E27CD2F9F002769D4 /* SchedulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F271259D27CD2F9F002769D4 /* SchedulerView.swift */; };
 		F27125A027CDBBDD002769D4 /* SchedulerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F271259F27CDBBDD002769D4 /* SchedulerModel.swift */; };
+		F2752368280AA047005759A4 /* HomeSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2752367280AA047005759A4 /* HomeSupport.swift */; };
 		F281D35027E3F32100CB1444 /* WelcomeTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F281D34F27E3F32100CB1444 /* WelcomeTitle.swift */; };
 		F281D35227E492F200CB1444 /* WelcomePageEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F281D35127E492F200CB1444 /* WelcomePageEntry.swift */; };
 		F286D33827E2E4530025BB9F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286D33327E2E4530025BB9F /* Profile.swift */; };
 		F286D33B27E2E4530025BB9F /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286D33627E2E4530025BB9F /* Page.swift */; };
 		F286D3A627E01ACA00D9B3FB /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286D3A527E01ACA00D9B3FB /* WelcomeView.swift */; };
 		F286D3A927E0203500D9B3FB /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286D3A827E0203500D9B3FB /* WelcomePage.swift */; };
+		F28A6E5528129D22003F9F0C /* ConfirmedApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28A6E5428129D22003F9F0C /* ConfirmedApptView.swift */; };
+		F28A6E5728129D9C003F9F0C /* PaidApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28A6E5628129D9C003F9F0C /* PaidApptView.swift */; };
+		F28A6E592812A2B5003F9F0C /* AppointmentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28A6E582812A2B5003F9F0C /* AppointmentStatus.swift */; };
+		F28A752527F82230005FDA3F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F28A752427F82230005FDA3F /* FirebaseAnalytics */; };
+		F28A752727F82230005FDA3F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F28A752627F82230005FDA3F /* FirebaseAuth */; };
+		F28A752927F82230005FDA3F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F28A752827F82230005FDA3F /* FirebaseFirestore */; };
+		F28A752B27F82230005FDA3F /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = F28A752A27F82230005FDA3F /* FirebaseFunctions */; };
+		F28A752D27F8227B005FDA3F /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28A752C27F8227B005FDA3F /* CloudManager.swift */; };
+		F28A753027F83384005FDA3F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F28A752F27F83384005FDA3F /* Alamofire */; };
 		F29642B927A69AE800E10FD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F29642B827A69AE800E10FD7 /* GoogleService-Info.plist */; };
 		F29642BC27AD216600E10FD7 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29642BB27AD216600E10FD7 /* FirestoreManager.swift */; };
 		F29642E127B2F50D00E10FD7 /* FirestoreLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29642E027B2F50D00E10FD7 /* FirestoreLoader.swift */; };
@@ -39,19 +49,34 @@
 		F29CF8FD27E5BFF70089F934 /* Rajdhani-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29CF8F727E5BFF70089F934 /* Rajdhani-Regular.ttf */; };
 		F29CF90127E5C01E0089F934 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29CF8FF27E5C01E0089F934 /* BebasNeue-Regular.ttf */; };
 		F2A15A2827A16DC20019B934 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A15A2727A16DC20019B934 /* AppDelegate.swift */; };
-		F2B03D5727DDE4E300A1E04F /* FirestorePay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B03D5627DDE4E300A1E04F /* FirestorePay.swift */; };
 		F2B03D5A27DDE63000A1E04F /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = F2B03D5927DDE63000A1E04F /* Stripe */; };
 		F2B03D5C27DDE63000A1E04F /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = F2B03D5B27DDE63000A1E04F /* StripeApplePay */; };
-		F2B03D5E27DDF10900A1E04F /* FirestorePayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B03D5D27DDF10900A1E04F /* FirestorePayModel.swift */; };
+		F2C01C2A280E4F76003F04B5 /* AdminData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C29280E4F76003F04B5 /* AdminData.swift */; };
+		F2C01C2C280E5667003F04B5 /* AppointmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C2B280E5667003F04B5 /* AppointmentKey.swift */; };
+		F2C01C2E280E57DE003F04B5 /* ListUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C2D280E57DE003F04B5 /* ListUtility.swift */; };
+		F2C01C30280E589E003F04B5 /* FormatUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C2F280E589E003F04B5 /* FormatUtility.swift */; };
+		F2C01C32280E592D003F04B5 /* ApptDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C31280E592D003F04B5 /* ApptDropDelegate.swift */; };
+		F2C01C3E280E7786003F04B5 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C36280E7786003F04B5 /* FooterView.swift */; };
+		F2C01C3F280E7786003F04B5 /* FocusApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C37280E7786003F04B5 /* FocusApptView.swift */; };
+		F2C01C40280E7786003F04B5 /* CompletedApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C38280E7786003F04B5 /* CompletedApptView.swift */; };
+		F2C01C41280E7786003F04B5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C39280E7786003F04B5 /* HeaderView.swift */; };
+		F2C01C42280E7786003F04B5 /* AppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C3A280E7786003F04B5 /* AppointmentView.swift */; };
+		F2C01C43280E7786003F04B5 /* AddApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C3B280E7786003F04B5 /* AddApptView.swift */; };
+		F2C01C44280E7786003F04B5 /* AdminNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C3C280E7786003F04B5 /* AdminNavigation.swift */; };
+		F2C01C45280E7786003F04B5 /* ActiveApptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C3D280E7786003F04B5 /* ActiveApptView.swift */; };
 		F2D198FA27B65121007770A4 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D198F927B65121007770A4 /* Animator.swift */; };
+		F2D89F7A28150E290057A1DA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7928150E290057A1DA /* AuthViewController.swift */; };
+		F2D89F7C281516620057A1DA /* FaceIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7B281516620057A1DA /* FaceIDAuthentication.swift */; };
+		F2D89F80281659990057A1DA /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7F281659990057A1DA /* SplashView.swift */; };
 		F2E3385127955C9F006044E0 /* fmfitnessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3385027955C9F006044E0 /* fmfitnessApp.swift */; };
-		F2E3385327955C9F006044E0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3385227955C9F006044E0 /* HomeView.swift */; };
 		F2E3385527955CA0006044E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E3385427955CA0006044E0 /* Assets.xcassets */; };
 		F2E3385827955CA0006044E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E3385727955CA0006044E0 /* Preview Assets.xcassets */; };
 		F2E3386C27955CA0006044E0 /* fmfitnessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3386B27955CA0006044E0 /* fmfitnessUITests.swift */; };
 		F2E3386E27955CA0006044E0 /* fmfitnessUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3386D27955CA0006044E0 /* fmfitnessUITestsLaunchTests.swift */; };
-		F2F104B82796B3B80065A966 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104B72796B3B80065A966 /* CircleImage.swift */; };
-		F2F104C92796B4D90065A966 /* CategoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104C82796B4D90065A966 /* CategoryHome.swift */; };
+		F2EEB91228044B6300554D22 /* StripeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EEB91128044B6300554D22 /* StripeView.swift */; };
+		F2EEB91428044CA700554D22 /* StripePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EEB91328044CA700554D22 /* StripePage.swift */; };
+		F2EEB9162807E51000554D22 /* HomeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EEB9152807E51000554D22 /* HomeBase.swift */; };
+		F2F104B82796B3B80065A966 /* GlobalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104B72796B3B80065A966 /* GlobalViews.swift */; };
 		F2F104DF2797F0770065A966 /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104DE2797F0770065A966 /* ProfileHost.swift */; };
 		F2F104E12797F09D0065A966 /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104E02797F09D0065A966 /* ProfileSummary.swift */; };
 		F2F104E52798029D0065A966 /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F104E42798029D0065A966 /* ProfileEditor.swift */; };
@@ -87,7 +112,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F234168E27EDBB6D009F296D /* StripePay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePay.swift; sourceTree = "<group>"; };
+		F22F28E82807E7590062BD10 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F22F28EC280901CE0062BD10 /* AdminPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPage.swift; sourceTree = "<group>"; };
+		F22F28EE280901D90062BD10 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
+		F22F28F0280907AC0062BD10 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		F24C59BC27E7377900495E79 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		F24C59BE27E738A100495E79 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F26DF7E427A1B22F00AC0555 /* GoogleSignInAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInAuthenticator.swift; sourceTree = "<group>"; };
@@ -97,6 +125,7 @@
 		F26DF7EC27A1B89E00AC0555 /* ProfileImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageLoader.swift; sourceTree = "<group>"; };
 		F271259D27CD2F9F002769D4 /* SchedulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerView.swift; sourceTree = "<group>"; };
 		F271259F27CDBBDD002769D4 /* SchedulerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerModel.swift; sourceTree = "<group>"; };
+		F2752367280AA047005759A4 /* HomeSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSupport.swift; sourceTree = "<group>"; };
 		F281D34F27E3F32100CB1444 /* WelcomeTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTitle.swift; sourceTree = "<group>"; };
 		F281D35127E492F200CB1444 /* WelcomePageEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageEntry.swift; sourceTree = "<group>"; };
 		F286D33327E2E4530025BB9F /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -104,6 +133,10 @@
 		F286D33F27E2F7960025BB9F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = fmfitness/Resources/Properties/Info.plist; sourceTree = SOURCE_ROOT; };
 		F286D3A527E01ACA00D9B3FB /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F286D3A827E0203500D9B3FB /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
+		F28A6E5428129D22003F9F0C /* ConfirmedApptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedApptView.swift; sourceTree = "<group>"; };
+		F28A6E5628129D9C003F9F0C /* PaidApptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidApptView.swift; sourceTree = "<group>"; };
+		F28A6E582812A2B5003F9F0C /* AppointmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentStatus.swift; sourceTree = "<group>"; };
+		F28A752C27F8227B005FDA3F /* CloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		F29642B827A69AE800E10FD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "fmfitness/Resources/Properties/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F29642BB27AD216600E10FD7 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		F29642E027B2F50D00E10FD7 /* FirestoreLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreLoader.swift; sourceTree = "<group>"; };
@@ -118,20 +151,35 @@
 		F2A15A2727A16DC20019B934 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2A80F9627C04A2200A1533C /* ProfileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProfileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A80F9827C04A2200A1533C /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
-		F2B03D5627DDE4E300A1E04F /* FirestorePay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePay.swift; sourceTree = "<group>"; };
-		F2B03D5D27DDF10900A1E04F /* FirestorePayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePayModel.swift; sourceTree = "<group>"; };
+		F2C01C29280E4F76003F04B5 /* AdminData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminData.swift; sourceTree = "<group>"; };
+		F2C01C2B280E5667003F04B5 /* AppointmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentKey.swift; sourceTree = "<group>"; };
+		F2C01C2D280E57DE003F04B5 /* ListUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUtility.swift; sourceTree = "<group>"; };
+		F2C01C2F280E589E003F04B5 /* FormatUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatUtility.swift; sourceTree = "<group>"; };
+		F2C01C31280E592D003F04B5 /* ApptDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApptDropDelegate.swift; sourceTree = "<group>"; };
+		F2C01C36280E7786003F04B5 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		F2C01C37280E7786003F04B5 /* FocusApptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusApptView.swift; sourceTree = "<group>"; };
+		F2C01C38280E7786003F04B5 /* CompletedApptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedApptView.swift; sourceTree = "<group>"; };
+		F2C01C39280E7786003F04B5 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		F2C01C3A280E7786003F04B5 /* AppointmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentView.swift; sourceTree = "<group>"; };
+		F2C01C3B280E7786003F04B5 /* AddApptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddApptView.swift; sourceTree = "<group>"; };
+		F2C01C3C280E7786003F04B5 /* AdminNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminNavigation.swift; sourceTree = "<group>"; };
+		F2C01C3D280E7786003F04B5 /* ActiveApptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveApptView.swift; sourceTree = "<group>"; };
 		F2D198F927B65121007770A4 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		F2D89F7928150E290057A1DA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		F2D89F7B281516620057A1DA /* FaceIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDAuthentication.swift; sourceTree = "<group>"; };
+		F2D89F7F281659990057A1DA /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F2E3384D27955C9F006044E0 /* fmfitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fmfitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E3385027955C9F006044E0 /* fmfitnessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fmfitnessApp.swift; sourceTree = "<group>"; };
-		F2E3385227955C9F006044E0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F2E3385427955CA0006044E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2E3385727955CA0006044E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F2E3385D27955CA0006044E0 /* fmfitnessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fmfitnessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E3386727955CA0006044E0 /* fmfitnessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fmfitnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E3386B27955CA0006044E0 /* fmfitnessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fmfitnessUITests.swift; sourceTree = "<group>"; };
 		F2E3386D27955CA0006044E0 /* fmfitnessUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fmfitnessUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F2F104B72796B3B80065A966 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
-		F2F104C82796B4D90065A966 /* CategoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHome.swift; sourceTree = "<group>"; };
+		F2EEB91128044B6300554D22 /* StripeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeView.swift; sourceTree = "<group>"; };
+		F2EEB91328044CA700554D22 /* StripePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripePage.swift; sourceTree = "<group>"; };
+		F2EEB9152807E51000554D22 /* HomeBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBase.swift; sourceTree = "<group>"; };
+		F2F104B72796B3B80065A966 /* GlobalViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViews.swift; sourceTree = "<group>"; };
 		F2F104DE2797F0770065A966 /* ProfileHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		F2F104E02797F09D0065A966 /* ProfileSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		F2F104E42798029D0065A966 /* ProfileEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
@@ -154,11 +202,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2B03D5A27DDE63000A1E04F /* Stripe in Frameworks */,
-				F258191F27DD9E32000F74FA /* FirebaseAnalytics in Frameworks */,
-				F258192327DD9E32000F74FA /* FirebaseFirestore in Frameworks */,
+				F28A753027F83384005FDA3F /* Alamofire in Frameworks */,
+				F28A752B27F82230005FDA3F /* FirebaseFunctions in Frameworks */,
+				F28A752727F82230005FDA3F /* FirebaseAuth in Frameworks */,
 				F2B03D5C27DDE63000A1E04F /* StripeApplePay in Frameworks */,
-				F258192127DD9E32000F74FA /* FirebaseAuth in Frameworks */,
+				F28A752527F82230005FDA3F /* FirebaseAnalytics in Frameworks */,
 				F258191C27DD9D34000F74FA /* GoogleSignIn in Frameworks */,
+				F28A752927F82230005FDA3F /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +229,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F22F28EB280901BF0062BD10 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				F2C01C29280E4F76003F04B5 /* AdminData.swift */,
+				F22F28EC280901CE0062BD10 /* AdminPage.swift */,
+				F2C01C3C280E7786003F04B5 /* AdminNavigation.swift */,
+				F2C01C35280E7786003F04B5 /* AdminViews */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
 		F231C49B27DFDD040057D006 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,7 +253,8 @@
 		F234168D27EDBB5C009F296D /* Stripe */ = {
 			isa = PBXGroup;
 			children = (
-				F234168E27EDBB6D009F296D /* StripePay.swift */,
+				F2EEB91128044B6300554D22 /* StripeView.swift */,
+				F2EEB91328044CA700554D22 /* StripePage.swift */,
 			);
 			path = Stripe;
 			sourceTree = "<group>";
@@ -211,6 +273,12 @@
 			children = (
 				F286D33327E2E4530025BB9F /* Profile.swift */,
 				F286D33627E2E4530025BB9F /* Page.swift */,
+				F22F28F0280907AC0062BD10 /* Appointment.swift */,
+				F2C01C2B280E5667003F04B5 /* AppointmentKey.swift */,
+				F2C01C2D280E57DE003F04B5 /* ListUtility.swift */,
+				F2C01C2F280E589E003F04B5 /* FormatUtility.swift */,
+				F2C01C31280E592D003F04B5 /* ApptDropDelegate.swift */,
+				F28A6E582812A2B5003F9F0C /* AppointmentStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,8 +308,7 @@
 			children = (
 				F29642BB27AD216600E10FD7 /* FirestoreManager.swift */,
 				F29642E027B2F50D00E10FD7 /* FirestoreLoader.swift */,
-				F2B03D5627DDE4E300A1E04F /* FirestorePay.swift */,
-				F2B03D5D27DDF10900A1E04F /* FirestorePayModel.swift */,
+				F28A752C27F8227B005FDA3F /* CloudManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -266,20 +333,21 @@
 			path = Bebas_Neue;
 			sourceTree = "<group>";
 		};
-		F2D198EE27B6504B007770A4 /* Utility */ = {
+		F2C01C35280E7786003F04B5 /* AdminViews */ = {
 			isa = PBXGroup;
 			children = (
-				F2D198F827B650F1007770A4 /* TransitionAnimators */,
+				F2C01C3A280E7786003F04B5 /* AppointmentView.swift */,
+				F2C01C36280E7786003F04B5 /* FooterView.swift */,
+				F2C01C37280E7786003F04B5 /* FocusApptView.swift */,
+				F2C01C38280E7786003F04B5 /* CompletedApptView.swift */,
+				F2C01C39280E7786003F04B5 /* HeaderView.swift */,
+				F2C01C3B280E7786003F04B5 /* AddApptView.swift */,
+				F2C01C3D280E7786003F04B5 /* ActiveApptView.swift */,
+				F22F28EE280901D90062BD10 /* AdminView.swift */,
+				F28A6E5428129D22003F9F0C /* ConfirmedApptView.swift */,
+				F28A6E5628129D9C003F9F0C /* PaidApptView.swift */,
 			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		F2D198F827B650F1007770A4 /* TransitionAnimators */ = {
-			isa = PBXGroup;
-			children = (
-				F2D198F927B65121007770A4 /* Animator.swift */,
-			);
-			path = TransitionAnimators;
+			path = AdminViews;
 			sourceTree = "<group>";
 		};
 		F2E3384427955C9F006044E0 = {
@@ -307,9 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				F2A15A2727A16DC20019B934 /* AppDelegate.swift */,
-				F2E3385027955C9F006044E0 /* fmfitnessApp.swift */,
 				F2F105052798A69D0065A966 /* ContentView.swift */,
-				F2E3385227955C9F006044E0 /* HomeView.swift */,
+				F2E3385027955C9F006044E0 /* fmfitnessApp.swift */,
 				F2E3385427955CA0006044E0 /* Assets.xcassets */,
 				F2E3387A27956AD2006044E0 /* Views */,
 				F2F104AA2796AFE20065A966 /* Resources */,
@@ -347,14 +414,14 @@
 		F2E3387A27956AD2006044E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F2F104C72796B4BE0065A966 /* Home */,
+				F22F28EB280901BF0062BD10 /* Admin */,
+				F29642DF27B2F3C300E10FD7 /* Firestore */,
 				F234168D27EDBB5C009F296D /* Stripe */,
 				F286D3A727E0200E00D9B3FB /* Welcome */,
 				F271259C27CD12DE002769D4 /* Scheduler */,
 				F2F104F027981D8D0065A966 /* Authentication */,
-				F29642DF27B2F3C300E10FD7 /* Firestore */,
 				F2F104DD2797F0530065A966 /* Profiles */,
-				F2F104C72796B4BE0065A966 /* Categories */,
-				F2F104B62796B3740065A966 /* Helpers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,10 +429,10 @@
 		F2F104AA2796AFE20065A966 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F2F104B62796B3740065A966 /* Helpers */,
 				F286D3B127E1952F00D9B3FB /* Properties */,
 				F231C49B27DFDD040057D006 /* Fonts */,
 				F286D33227E2E4530025BB9F /* Model */,
-				F2D198EE27B6504B007770A4 /* Utility */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -373,18 +440,22 @@
 		F2F104B62796B3740065A966 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F2F104B72796B3B80065A966 /* CircleImage.swift */,
+				F2F104B72796B3B80065A966 /* GlobalViews.swift */,
 				F29CF8EF27E5B7AB0089F934 /* MenuView.swift */,
+				F2D198F927B65121007770A4 /* Animator.swift */,
+				F2D89F7F281659990057A1DA /* SplashView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		F2F104C72796B4BE0065A966 /* Categories */ = {
+		F2F104C72796B4BE0065A966 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F2F104C82796B4D90065A966 /* CategoryHome.swift */,
+				F2EEB9152807E51000554D22 /* HomeBase.swift */,
+				F22F28E82807E7590062BD10 /* HomeView.swift */,
+				F2752367280AA047005759A4 /* HomeSupport.swift */,
 			);
-			path = Categories;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		F2F104DD2797F0530065A966 /* Profiles */ = {
@@ -402,13 +473,15 @@
 		F2F104F027981D8D0065A966 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				F26DF7E427A1B22F00AC0555 /* GoogleSignInAuthenticator.swift */,
 				F26DF7E627A1B29C00AC0555 /* GoogleSignInButtonWrapper.swift */,
+				F26DF7E427A1B22F00AC0555 /* GoogleSignInAuthenticator.swift */,
+				F2D89F7928150E290057A1DA /* AuthViewController.swift */,
 				F26DF7E827A1B36000AC0555 /* AuthenticationViewModel.swift */,
 				F2F104FF279851830065A966 /* SignUpPage.swift */,
 				F2F104F127981DAB0065A966 /* SignInPage.swift */,
 				F24C59BC27E7377900495E79 /* SignInView.swift */,
 				F24C59BE27E738A100495E79 /* SignUpView.swift */,
+				F2D89F7B281516620057A1DA /* FaceIDAuthentication.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -449,11 +522,13 @@
 			name = fmfitness;
 			packageProductDependencies = (
 				F258191B27DD9D34000F74FA /* GoogleSignIn */,
-				F258191E27DD9E32000F74FA /* FirebaseAnalytics */,
-				F258192027DD9E32000F74FA /* FirebaseAuth */,
-				F258192227DD9E32000F74FA /* FirebaseFirestore */,
 				F2B03D5927DDE63000A1E04F /* Stripe */,
 				F2B03D5B27DDE63000A1E04F /* StripeApplePay */,
+				F28A752427F82230005FDA3F /* FirebaseAnalytics */,
+				F28A752627F82230005FDA3F /* FirebaseAuth */,
+				F28A752827F82230005FDA3F /* FirebaseFirestore */,
+				F28A752A27F82230005FDA3F /* FirebaseFunctions */,
+				F28A752F27F83384005FDA3F /* Alamofire */,
 			);
 			productName = fmfitness;
 			productReference = F2E3384D27955C9F006044E0 /* fmfitness.app */;
@@ -536,8 +611,9 @@
 			mainGroup = F2E3384427955C9F006044E0;
 			packageReferences = (
 				F258191A27DD9D33000F74FA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				F258191D27DD9E32000F74FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */,
+				F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F28A752E27F83384005FDA3F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = F2E3384E27955C9F006044E0 /* Products */;
 			projectDirPath = "";
@@ -604,39 +680,62 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2B03D5727DDE4E300A1E04F /* FirestorePay.swift in Sources */,
 				F26DF7ED27A1B89E00AC0555 /* ProfileImageLoader.swift in Sources */,
+				F2EEB91428044CA700554D22 /* StripePage.swift in Sources */,
+				F22F28E92807E7590062BD10 /* HomeView.swift in Sources */,
 				F286D3A627E01ACA00D9B3FB /* WelcomeView.swift in Sources */,
 				F2F104F227981DAB0065A966 /* SignInPage.swift in Sources */,
-				F2E3385327955C9F006044E0 /* HomeView.swift in Sources */,
 				F2F104DF2797F0770065A966 /* ProfileHost.swift in Sources */,
+				F2EEB9162807E51000554D22 /* HomeBase.swift in Sources */,
 				F2F105062798A69D0065A966 /* ContentView.swift in Sources */,
 				F26DF7E727A1B29C00AC0555 /* GoogleSignInButtonWrapper.swift in Sources */,
-				F2B03D5E27DDF10900A1E04F /* FirestorePayModel.swift in Sources */,
+				F2C01C43280E7786003F04B5 /* AddApptView.swift in Sources */,
 				F26DF7EB27A1B80900AC0555 /* ProfileImageView.swift in Sources */,
+				F2C01C2C280E5667003F04B5 /* AppointmentKey.swift in Sources */,
 				F29642BC27AD216600E10FD7 /* FirestoreManager.swift in Sources */,
 				F2D198FA27B65121007770A4 /* Animator.swift in Sources */,
 				F26DF7E527A1B22F00AC0555 /* GoogleSignInAuthenticator.swift in Sources */,
+				F2D89F80281659990057A1DA /* SplashView.swift in Sources */,
 				F2F10500279851830065A966 /* SignUpPage.swift in Sources */,
 				F24C59BF27E738A100495E79 /* SignUpView.swift in Sources */,
 				F271259E27CD2F9F002769D4 /* SchedulerView.swift in Sources */,
+				F2C01C45280E7786003F04B5 /* ActiveApptView.swift in Sources */,
+				F28A6E5728129D9C003F9F0C /* PaidApptView.swift in Sources */,
+				F2C01C3E280E7786003F04B5 /* FooterView.swift in Sources */,
+				F28A6E592812A2B5003F9F0C /* AppointmentStatus.swift in Sources */,
 				F281D35227E492F200CB1444 /* WelcomePageEntry.swift in Sources */,
+				F2C01C2A280E4F76003F04B5 /* AdminData.swift in Sources */,
 				F2F104E12797F09D0065A966 /* ProfileSummary.swift in Sources */,
 				F2A15A2827A16DC20019B934 /* AppDelegate.swift in Sources */,
 				F281D35027E3F32100CB1444 /* WelcomeTitle.swift in Sources */,
-				F234168F27EDBB6D009F296D /* StripePay.swift in Sources */,
+				F2752368280AA047005759A4 /* HomeSupport.swift in Sources */,
 				F2F104E52798029D0065A966 /* ProfileEditor.swift in Sources */,
+				F2C01C44280E7786003F04B5 /* AdminNavigation.swift in Sources */,
 				F27125A027CDBBDD002769D4 /* SchedulerModel.swift in Sources */,
+				F2C01C3F280E7786003F04B5 /* FocusApptView.swift in Sources */,
+				F2C01C41280E7786003F04B5 /* HeaderView.swift in Sources */,
 				F26DF7E927A1B36000AC0555 /* AuthenticationViewModel.swift in Sources */,
+				F2D89F7A28150E290057A1DA /* AuthViewController.swift in Sources */,
+				F2C01C42280E7786003F04B5 /* AppointmentView.swift in Sources */,
 				F2E3385127955C9F006044E0 /* fmfitnessApp.swift in Sources */,
+				F22F28EF280901D90062BD10 /* AdminView.swift in Sources */,
+				F2C01C2E280E57DE003F04B5 /* ListUtility.swift in Sources */,
 				F286D3A927E0203500D9B3FB /* WelcomePage.swift in Sources */,
+				F28A752D27F8227B005FDA3F /* CloudManager.swift in Sources */,
 				F286D33827E2E4530025BB9F /* Profile.swift in Sources */,
+				F28A6E5528129D22003F9F0C /* ConfirmedApptView.swift in Sources */,
+				F2D89F7C281516620057A1DA /* FaceIDAuthentication.swift in Sources */,
+				F2EEB91228044B6300554D22 /* StripeView.swift in Sources */,
+				F22F28F1280907AC0062BD10 /* Appointment.swift in Sources */,
+				F2C01C40280E7786003F04B5 /* CompletedApptView.swift in Sources */,
+				F22F28ED280901CE0062BD10 /* AdminPage.swift in Sources */,
 				F24C59BD27E7377900495E79 /* SignInView.swift in Sources */,
+				F2C01C30280E589E003F04B5 /* FormatUtility.swift in Sources */,
 				F29642E127B2F50D00E10FD7 /* FirestoreLoader.swift in Sources */,
 				F29CF8F027E5B7AB0089F934 /* MenuView.swift in Sources */,
-				F2F104B82796B3B80065A966 /* CircleImage.swift in Sources */,
+				F2F104B82796B3B80065A966 /* GlobalViews.swift in Sources */,
+				F2C01C32280E592D003F04B5 /* ApptDropDelegate.swift in Sources */,
 				F286D33B27E2E4530025BB9F /* Page.swift in Sources */,
-				F2F104C92796B4D90065A966 /* CategoryHome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,13 +984,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fmfitness/Resources/Properties/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = fmfitness;
-				INFOPLIST_KEY_NSMainNibFile = iPhone;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID instead of a password to access your account.";
+				INFOPLIST_KEY_NSMainNibFile = MainWindow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -919,13 +1021,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fmfitness/Resources/Properties/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = fmfitness;
-				INFOPLIST_KEY_NSMainNibFile = iPhone;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID instead of a password to access your account.";
+				INFOPLIST_KEY_NSMainNibFile = MainWindow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashView;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1094,12 +1199,20 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		F258191D27DD9E32000F74FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
+			};
+		};
+		F28A752E27F83384005FDA3F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 		F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
@@ -1118,20 +1231,30 @@
 			package = F258191A27DD9D33000F74FA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
 		};
-		F258191E27DD9E32000F74FA /* FirebaseAnalytics */ = {
+		F28A752427F82230005FDA3F /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F258191D27DD9E32000F74FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
 		};
-		F258192027DD9E32000F74FA /* FirebaseAuth */ = {
+		F28A752627F82230005FDA3F /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F258191D27DD9E32000F74FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		F258192227DD9E32000F74FA /* FirebaseFirestore */ = {
+		F28A752827F82230005FDA3F /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F258191D27DD9E32000F74FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		F28A752A27F82230005FDA3F /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F28A752327F82230005FDA3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		F28A752F27F83384005FDA3F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F28A752E27F83384005FDA3F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		F2B03D5927DDE63000A1E04F /* Stripe */ = {
 			isa = XCSwiftPackageProductDependency;

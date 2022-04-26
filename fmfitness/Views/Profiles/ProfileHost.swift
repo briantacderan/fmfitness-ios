@@ -45,12 +45,17 @@ struct ProfileHost: View {
                                 }
                                 .onDisappear {
                                     firestore.profile = draftProfile
-                                    firestore.setProfile(email: firestore.profile.email,
-                                                         isAdmin: firestore.profile.isAdmin,
-                                                         prefersNotifications: firestore.profile.prefersNotifications,
-                                                         seasonalPhoto: firestore.profile.seasonalPhoto,
-                                                         nextAppointment: firestore.profile.nextAppointment,
-                                                         username: firestore.profile._username)
+                                    firestore.setProfile(parameters: [
+                                        "email": firestore.profile.email,
+                                        "isAdmin": firestore.profile.isAdmin,
+                                        "acctNum": firestore.profile.stripeID,
+                                        "striped": firestore.profile.stripeConnected,
+                                        "currentLevel": firestore.profile.currentLevel,
+                                        "balanceDue": firestore.profile.outstandingBalance,
+                                        "timeslot": firestore.profile.nextAppointment,
+                                        "focusTarget": firestore.profile.focusTarget,
+                                        "username": firestore.profile._username
+                                    ])
                                 }
                             
                             HStack {

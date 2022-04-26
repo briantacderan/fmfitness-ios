@@ -10,6 +10,12 @@ import GoogleSignIn
 import Firebase
 import FirebaseFirestore
 
+extension StringProtocol {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
+    }
+}
+
 struct ProfileSummary: View {
     
     @ObservedObject var firestore = FirestoreManager.shared
@@ -19,6 +25,15 @@ struct ProfileSummary: View {
     }
     
     let dateNow = Date()
+    var focus = [""]
+    var focusChar: [Character] = []
+    
+    init() {
+        focus = [firestore.profile.focusTarget]
+        focus = [focus[0].replacingOccurrences(of: "-", with: " ").capitalized]
+        focus = focus[0].components(separatedBy: " ")
+        focusChar = [focus[0][0], focus[1][0]]
+    }
 
     var body: some View {
         ScrollView {
@@ -49,20 +64,46 @@ struct ProfileSummary: View {
                     .foregroundColor(.secondary)
             }
             .frame(width: UIScreen.main.bounds.width*4/5)
-            .padding()
+            .padding(.top)
              
             Divider()
             
             VStack(alignment: .leading, spacing: 5) {
-                Text("Notifications: \(firestore.profile.prefersNotifications ? "On": "Off" )")
-                Text("Readiness: \(firestore.profile.seasonalPhoto)")
-                    .padding(.bottom, 10)
-                
+                HStack {
+                    Text("Currently: ")
+                        .padding(.bottom, 10)
+                    
+                    Text(firestore.profile.currentLevel)
+                        .frame(width: UIScreen.main.bounds.width*1/6,
+                               height: UIScreen.main.bounds.width*1/6)
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .background(.thinMaterial)
+                        .foregroundColor(Color("csf-main"))
+                        .foregroundStyle(.ultraThinMaterial)
+                        .cornerRadius(6)
+                        .padding()
+                    
+                    Text("Next: ")
+                        .padding(.bottom, 10)
+                   
+                    HStack {
+                        Text(String(focusChar[0]))
+                        Text(String(focusChar[1]))
+                    }
+                    .frame(width: UIScreen.main.bounds.width*1/6,
+                           height: UIScreen.main.bounds.width*1/6)
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .background(.thinMaterial)
+                    .font(Font.custom("BebasNeue", size: 30))
+                    .foregroundColor(Color("csf-main"))
+                    .foregroundStyle(.ultraThinMaterial)
+                    .cornerRadius(6)
+                    .padding()
+                }
                 Divider()
                 Spacer()
                 
                 if firestore.profile.nextAppointment > dateNow {
-                    //Text("Next Appointment: ") + Text(firestore.profile.nextAppointment, style: .date)
                     HStack {
                         Text("Next Appointment: ")
                         
@@ -101,7 +142,6 @@ struct ProfileSummary: View {
             .frame(width: UIScreen.main.bounds.width*4/5)
             .font(Font.custom("BebasNeue", size: 20))
             .padding()
-            .transition(.moveFromBottom)
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(.inline)

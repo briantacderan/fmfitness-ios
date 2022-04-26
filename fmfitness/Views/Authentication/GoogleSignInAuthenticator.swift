@@ -15,6 +15,7 @@ final class GoogleSignInAuthenticator: ObservableObject {
 
     @ObservedObject var firestore = FirestoreManager.shared
     @ObservedObject var authViewModel = AuthenticationViewModel.shared
+    @ObservedObject var biometric = BiometricIDAuth.shared
     
     private let clientID = "946966093400-qmmq36blar2a2v0vj1073tg0do52db11.apps.googleusercontent.com"
     // private let clientID = FirebaseApp.app()?.options.clientID

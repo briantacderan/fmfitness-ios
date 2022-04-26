@@ -7,21 +7,23 @@
 
 import Foundation
 
-
 struct Profile: Decodable {
     
-    var email: String
-    var isAdmin = false
-    var prefersNotifications = true
-    var seasonalPhoto: String = ""
-    var nextAppointment = Date()
+    var email: String = ""
+    var isAdmin: Bool = false
+    var stripeID: String = "new"
+    var stripeConnected: Bool = false
+    var currentLevel: String = Level.nine.rawValue
+    var outstandingBalance: Int = 0
+    var nextAppointment: Date = Date()
+    var focusTarget: String = Focus.tb.rawValue
     
     var _username: String?
     
     func getDefaultName() -> String {
         return email.components(separatedBy: "@")[0]
     }
-        
+    
     func username() -> String {
         let defaultName = getDefaultName()
         if _username != defaultName {
@@ -32,20 +34,35 @@ struct Profile: Decodable {
     
     static var `default`: Profile = Profile(email: "new_profile@email.com",
                                             isAdmin: false,
-                                            prefersNotifications: true,
-                                            seasonalPhoto: Season.ready.rawValue,
+                                            stripeID: "new",
+                                            stripeConnected: false,
+                                            currentLevel: Level.nine.rawValue,
+                                            outstandingBalance: 0,
                                             nextAppointment: Date(),
+                                            focusTarget: Focus.tb.rawValue,
                                             _username: "new_profile"
     )
 
-    enum Season: String, CaseIterable, Identifiable {
+    enum Level: String, CaseIterable, Identifiable {
         case one = "😷"
         case three = "😵"
         case five = "😮‍💨"
         case seven = "😕"
         case eight = "🙂"
         case nine = "😁"
-        case ready = "💪🏾"
+        case readyOne = "💪🏾"
+        case readyTwo = "💪🏼"
+
+        var id: String { rawValue }
+    }
+    
+    enum Focus: String, CaseIterable, Identifiable {
+        case cb = "chest-back"
+        case lb = "legs-back"
+        case sa = "shoulders-arms"
+        case bb = "back-biceps"
+        case ct = "chest-triceps"
+        case tb = "total-body"
 
         var id: String { rawValue }
     }
@@ -54,12 +71,15 @@ struct Profile: Decodable {
 extension Profile {
     
     enum CodingKeys: String, CodingKey {
-        case _username = "username"
         case email
         case isAdmin
+        case stripeID
+        case stripeConnected
+        case currentLevel
+        case outstandingBalance
         case nextAppointment
-        case prefersNotifications
-        case seasonalPhoto
+        case focusTarget
+        case _username = "username"
     }
 
     static func createFromJSON(_ data: Data) -> Profile {
@@ -68,13 +88,16 @@ extension Profile {
         return f!
     }
 
-    init(from decoder: Decoder, email: String, isAdmin: Bool, username: String, prefersNotifications: Bool, seasonalPhoto: String, nextAppointment: Date) throws {
+    init(from decoder: Decoder, email: String, isAdmin: Bool, stripeID: String, stripeConnected: Bool, currentLevel: String, outstandingBalance: Int, nextAppointment: Date, focusTarget: String, username: String) throws {
         // let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.prefersNotifications = prefersNotifications
-        self.seasonalPhoto = seasonalPhoto
-        self.nextAppointment = nextAppointment
         self.email = email
         self.isAdmin = isAdmin
+        self.stripeID = stripeID
+        self.stripeConnected = stripeConnected
+        self.currentLevel = currentLevel
+        self.outstandingBalance = outstandingBalance
+        self.nextAppointment = nextAppointment
+        self.focusTarget = focusTarget
         self._username = username
     }
 }
