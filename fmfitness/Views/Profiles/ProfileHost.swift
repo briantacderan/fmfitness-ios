@@ -4,89 +4,78 @@
 //
 //  Created by Brian Tacderan on 1/18/22.
 //
+
 import SwiftUI
 import Firebase
 import GoogleSignIn
 
 struct ProfileHost: View {
     
-    @Environment(\.editMode) var editMode
-
-    @ObservedObject var firestore = FirestoreManager.shared
-    @ObservedObject var authViewModel = AuthenticationViewModel.shared
+    //@Environment(\.editMode) var editMode
+    @Environment(\.controller) var controller
     
+    @ObservedObject var firestore = FirestoreManager.shared
     @State var draftProfile: Profile
+    @State var editMode: EditMode = .inactive
     
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 20) {
-                if editMode?.wrappedValue == .inactive {
-                    ProfileSummary()
-                    HStack {
-                        Spacer()
-                        EditButton()
-                        Spacer()
-                    }
-                    .font(Font.custom("BebasNeue", size: 30))
-                    .foregroundColor(Color("csf-accent"))
-                    .frame(width: UIScreen.main.bounds.width)
-                    .offset(x: 55, y: -UIScreen.main.bounds.height/8)
+                if $editMode.wrappedValue == .inactive {
+                    ProfileSummary(editMode: editMode)
                 } else {
-                    ZStack(alignment: .top) {
+                    ZStack(alignment: .bottom) {
                         VStack {
                             Text("Slide down to confirm changes")
-                                .frame(width: UIScreen.main.bounds.width/1.5)
-                                .padding(.top, 25)
-                                .font(Font.custom("BebasNeue", size: 20))
+                                .padding()
+                                .font(Font.custom("Rajdhani-Medium", size: 20))
                             
                             ProfileEditor(profile: $draftProfile)
+                                .frame(height: UIScreen.height*2/3)
                                 .onAppear {
                                     draftProfile = firestore.profile
                                 }
                                 .onDisappear {
                                     firestore.profile = draftProfile
-                                    firestore.setProfile(parameters: [
+                                    controller.setProfile(parameters: [
                                         "email": firestore.profile.email,
-                                        "isAdmin": firestore.profile.isAdmin,
-                                        "acctNum": firestore.profile.stripeID,
-                                        "striped": firestore.profile.stripeConnected,
-                                        "currentLevel": firestore.profile.currentLevel,
-                                        "balanceDue": firestore.profile.outstandingBalance,
-                                        "timeslot": firestore.profile.nextAppointment,
-                                        "focusTarget": firestore.profile.focusTarget,
+                                        "level": firestore.profile.currentLevel,
+                                        "focus": firestore.profile.focusTarget,
                                         "username": firestore.profile._username
                                     ])
                                 }
                             
                             HStack {
                                 Spacer()
-                                if editMode?.wrappedValue == .active {
-                                    Button("Cancel", role: .cancel) {
-                                        draftProfile = firestore.profile
-                                        editMode?.animation().wrappedValue = .inactive
+                                if $editMode.wrappedValue.isEditing {
+                                    Button("cancel", role: .cancel) {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            draftProfile = firestore.profile
+                                            editMode = .inactive
+                                        }
                                     }
-                                    .foregroundColor(Color("csf-main"))
+                                    .foregroundColor(.white)
                                 }
                                 Spacer()
                             }
-                            .font(Font.custom("BebasNeue", size: 35))
+                            .font(Font.custom("Rajdhani-SemiBold", size: 35))
                             .foregroundColor(Color("csf-accent"))
-                            .offset(y: -UIScreen.main.bounds.height/3)
                         }
                     }
                 }
             }
-            .background(Color("csb-main"))
-            .ignoresSafeArea()
             
             Capsule()
-                .fill(.black)
+                .fill(Color.black)
                 .frame(width: 75, height: 5)
                 .padding(10)
         }
+        .frame(width: UIScreen.width,
+               height: UIScreen.height*2/3)
     }
 }
 
+/*
 struct ProfileHost_Previews: PreviewProvider {
     static var firestore = FirestoreManager.shared
     
@@ -95,3 +84,4 @@ struct ProfileHost_Previews: PreviewProvider {
             //.preferredColorScheme(.dark)
     }
 }
+*/

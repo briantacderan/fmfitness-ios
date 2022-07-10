@@ -25,8 +25,8 @@ struct GoogleSignInButtonWrapper: UIViewRepresentable {
         signInButton.addTarget(context.coordinator,
                                action: #selector(Coordinator.callHandler),
                                for: .touchUpInside)
-        signInButton.style = .standard
-        signInButton.colorScheme = .dark
+        signInButton.style = .iconOnly
+        signInButton.colorScheme = .light
         return signInButton
     }
 

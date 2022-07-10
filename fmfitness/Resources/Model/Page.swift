@@ -12,8 +12,15 @@ enum Page {
     case welcomePage
     case loginPage
     case registerPage
+}
+
+enum Dashboard {
+    case startPage
     case homePage
-    case rsvpPage
-    case adminPage
-    case billingsPage
+}
+
+enum Tab {
+    case home
+    case schedule
+    case admin
 }

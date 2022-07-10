@@ -6,13 +6,17 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
+import GoogleSignIn
 
 struct Profile: Decodable {
     
+    var uid: String = ""
     var email: String = ""
     var isAdmin: Bool = false
-    var stripeID: String = "new"
-    var stripeConnected: Bool = false
+    var isMember: Bool = false
+    var userInfo: String = "new"
     var currentLevel: String = Level.nine.rawValue
     var outstandingBalance: Int = 0
     var nextAppointment: Date = Date()
@@ -32,10 +36,11 @@ struct Profile: Decodable {
         return _username!
     }
     
-    static var `default`: Profile = Profile(email: "new_profile@email.com",
-                                            isAdmin: false,
-                                            stripeID: "new",
-                                            stripeConnected: false,
+    static var `default`: Profile = Profile(uid: "abc123",
+                                            email: "new_profile@email.com",
+                                            isAdmin: true,
+                                            isMember: false,
+                                            userInfo: "new",
                                             currentLevel: Level.nine.rawValue,
                                             outstandingBalance: 0,
                                             nextAppointment: Date(),
@@ -71,10 +76,11 @@ struct Profile: Decodable {
 extension Profile {
     
     enum CodingKeys: String, CodingKey {
+        case uid
         case email
         case isAdmin
-        case stripeID
-        case stripeConnected
+        case isMember
+        case userInfo
         case currentLevel
         case outstandingBalance
         case nextAppointment
@@ -88,12 +94,13 @@ extension Profile {
         return f!
     }
 
-    init(from decoder: Decoder, email: String, isAdmin: Bool, stripeID: String, stripeConnected: Bool, currentLevel: String, outstandingBalance: Int, nextAppointment: Date, focusTarget: String, username: String) throws {
+    init(from decoder: Decoder, uid: String, email: String, isAdmin: Bool, isMember: Bool, userInfo: String, currentLevel: String, outstandingBalance: Int, nextAppointment: Date, focusTarget: String, username: String) throws {
         // let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.uid = uid
         self.email = email
         self.isAdmin = isAdmin
-        self.stripeID = stripeID
-        self.stripeConnected = stripeConnected
+        self.isMember = isMember
+        self.userInfo = userInfo
         self.currentLevel = currentLevel
         self.outstandingBalance = outstandingBalance
         self.nextAppointment = nextAppointment
@@ -101,7 +108,6 @@ extension Profile {
         self._username = username
     }
 }
-
 
 
 

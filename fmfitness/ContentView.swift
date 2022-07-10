@@ -9,37 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     
+    static var shared = ContentView()
+    @Environment(\.controller) var controller
+    
     @ObservedObject var firestore = FirestoreManager.shared
     
     var body: some View {
         switch firestore.currentPage {
-        case .welcomePage:
-            withAnimation {
-                WelcomeView()
+        case .startPage:
+            switch firestore.authRedirect {
+            case .welcomePage:
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    WelcomeView()
+                        .frame(width: UIScreen.width,
+                               height: UIScreen.height)
+                }
+            case .loginPage:
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    SignInView()
+                        .frame(width: UIScreen.width,
+                               height: UIScreen.height)
+                }
+            case .registerPage:
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    SignUpPage()
+                }
             }
         case .homePage:
-            withAnimation {
-                HomeBase(selection: .home)
-            }
-        case .loginPage:
-            withAnimation {
-                SignInView() 
-            }
-        case .registerPage:
-            withAnimation {
-                SignUpView()
-            }
-        case .rsvpPage:
-            withAnimation {
-                HomeBase(selection: .schedule)
-            }
-        case .adminPage:
-            withAnimation {
-                HomeBase(selection: .admin)
-            }
-        case .billingsPage:
-            withAnimation {
-                HomeBase(selection: .billings)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                DashboardView()
+                    .frame(width: UIScreen.width,
+                           height: UIScreen.height)
             }
         }
     }

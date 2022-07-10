@@ -9,27 +9,24 @@ import SwiftUI
 import SafariServices
 import Firebase
 
-extension AnyTransition {
-    public static var moveFromBottom: AnyTransition {
-        AnyTransition.move(edge: .bottom)
-    }
-}
-
-
 struct SignUpPage: View {
-
+    
+    @Environment(\.isPresented) var isPresented
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.controller) var controller
+    
     @ObservedObject var firestore = FirestoreManager.shared
-    @ObservedObject var cloud = CloudManager.shared
     
     @State var username = ""
     @State var email = ""
     @State var password = ""
     @State var passwordConfirmation = ""
     
-    @State var signUpProcessing = false
-    @State var signUpErrorMessage = ""
+    @State private var signUpProcessing = false
+    @State private var signUpErrorMessage = ""
+    @State private var registrationDidSucceed = false
     
-    @State var registrationDidSucceed = false
+    var alertView: UIAlertController?
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -54,10 +51,7 @@ struct SignUpPage: View {
                         SignUpCredentialFields(email: $email,
                                                password: $password,
                                                passwordConfirmation: $passwordConfirmation)
-                            .modifier(ConcaveGlassView())
-                            .foregroundColor(.black)
                     }
-                    .offset(x: -55)
                     
                     Spacer()
                 }
@@ -67,12 +61,13 @@ struct SignUpPage: View {
                     signUpUser(userEmail: email, userPassword: password)
                     //signUpStripe(userEmail: email)
                     withAnimation {
-                        firestore.next(newPage: .welcomePage)
+                        firestore.authRedirect = Page.loginPage
                     }
                 }) {
                     SignUpButtonContent(isProcessing: signUpProcessing)
+                        .foregroundColor((signUpProcessing || passwordConfirmation.isEmpty || (password != passwordConfirmation)) ? Color("B1-red") : Color("csb-sheet-light"))
                 }
-                .disabled(!signUpProcessing && !email.isEmpty && !password.isEmpty && !passwordConfirmation.isEmpty && password == passwordConfirmation ? false : true)
+                .disabled(signUpProcessing || passwordConfirmation.isEmpty || (password != passwordConfirmation))
 
                 Spacer()
             }
@@ -87,19 +82,16 @@ struct SignUpPage: View {
                 .frame(width: 75, height: 5)
                 .padding(10)
         }
-        .background(Color("LaunchScreenBackground"))
-        .frame(width: UIScreen.main.bounds.width,
-               height: UIScreen.main.bounds.height)
-        .blur(radius: 50)
-        .brightness(-0.35)
-        .preferredColorScheme(.dark)
+        .background(Color("csb-gray").opacity(0.5))
+        .frame(width: UIScreen.width,
+               height: UIScreen.height*2/3)
     }
     
     func signUpUser(userEmail: String, userPassword: String) {
         
         signUpProcessing = true
         
-        Auth.auth().createUser(withEmail: userEmail,
+        Auth.auth().createUser(withEmail: userEmail,         
                                password: userPassword) { res, error in
             guard error == nil else {
                 signUpErrorMessage = error!.localizedDescription
@@ -112,16 +104,22 @@ struct SignUpPage: View {
                 print("Could not create account")
                 signUpProcessing = false
             case .some(_):
-                firestore.setProfile(parameters: ["email": userEmail, "isAdmin": false, "striped": false, "currentLevel": Profile.Level.nine.rawValue, "balanceDue": 0, "acctNum": "new", "timeslot": Date(), "focusTarget": Profile.Focus.tb.rawValue, "username": userEmail.components(separatedBy: "@")[0]])
+                controller.setProfile(parameters: ["uid": res!.user.uid, "email": userEmail, "admin": false, "member": true, "level": Profile.Level.nine.rawValue, "balance": 0, "timeslot": Date(), "info": "new", "focus": Profile.Focus.tb.rawValue, "username": userEmail.components(separatedBy: "@")[0]])
                 print("User created")
                 
                 signUpErrorMessage = ""
                 registrationDidSucceed = true
                 signUpProcessing = false
+                if isPresented {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        dismiss()
+                    }
+                }
             }
         }
     }
     
+    /*
     func signUpStripe(userEmail: String) {
         cloud.createStripeConnectAccount(email: firestore.profile.email) { acctNum, error in
             guard error == nil else {
@@ -143,7 +141,7 @@ struct SignUpPage: View {
                 firestore.setProfile(parameters: ["acctNum": acctNum!, "email": userEmail])
             }
         }
-    }
+    }*/
 }
 
 struct SignUpPage_Previews: PreviewProvider {
@@ -155,9 +153,18 @@ struct SignUpPage_Previews: PreviewProvider {
 
 struct SignUpHeader: View {
     var body: some View {
-        Text("NEW ACCOUNT")
-            .font(Font.custom("BebasNeue", size: 50))
-            .padding(.bottom, 20)
+        HStack {
+            Text("New")
+            
+            HStack(spacing: 0) {
+                Text("FM")
+                    .foregroundColor(.black)
+                    .font(Font.custom("BebasNeue", size: 35))
+                Text("ACCOUNT")
+            }
+        }
+        .font(Font.custom("Rajdhani-Light", size: 35))
+        .padding(.bottom, 20)
     }
 }
 
@@ -175,11 +182,13 @@ struct SignUpButtonContent: View {
         } else {
             Text("SIGN UP")
                 .font(Font.custom("BebasNeue", size: 35))
-                .foregroundColor(.white)
+                //.foregroundColor(Color("csf-spin"))
                 .padding()
                 .frame(width: 220, height: 45)
-                .background(Color("csf-earth"))
-                .cornerRadius(15.0)
+                .background(Color("csb-main"))
+                .cornerRadius(14.0)
+                .padding(.top, 20)
+                .padding(.bottom, 50)
         }
     }
 }
@@ -194,28 +203,31 @@ struct SignUpCredentialFields: View {
         Group {
             TextField("Email", text: $email)
                 .padding(20)
-                .foregroundColor(.black)
-                .frame(width: 325, height: 45)
+                .foregroundColor(Color("csf-main"))
+                .frame(width: 325, height: 55)
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
+                .modifier(ConcaveGlassView())
 
             SecureField("Password", text: $password)
                 .padding(20)
-                .foregroundColor(.black)
-                .frame(width: 325, height: 45)
+                .foregroundColor(Color("csf-main"))
+                .frame(width: 325, height: 55)
                 .background(.thinMaterial)
                 .cornerRadius(10)
+                .modifier(ConcaveGlassView())
 
             SecureField("Confirm Password", text: $passwordConfirmation)
                 .padding(20)
                 .foregroundColor(Color("csf-main"))
-                .frame(width: 325, height: 45)
+                .frame(width: 325, height: 55)
                 .background(.thinMaterial)
                 .cornerRadius(10)
-                .border(Color.red, width: passwordConfirmation != password ? 1 : 0)
+                .border(Color("B1-red"), width: passwordConfirmation != password ? 1 : 0)
+                .modifier(ConcaveGlassView())
         }
-        .offset(x: -14)
+        .font(Font.custom("Rajdhani-Light", size: 16))
     }
 }
 
@@ -224,7 +236,7 @@ struct SignUpSuccessView: View {
         Text("Registration completed")
             .font(.headline)
             .frame(width: 250, height: 80)
-            .background(Color("csf-earth"))
+            .background(Color("csf-main"))
             .cornerRadius(20.0)
             .foregroundColor(.white)
             .animation(.easeIn, value: true)

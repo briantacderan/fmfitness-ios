@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "back-biceps.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "back-biceps.png",
+      "filename" : "back-biceps@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "back-biceps@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

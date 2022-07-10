@@ -9,28 +9,35 @@ import Foundation
 
 struct Appointment: Decodable {
     
-    var id: Int = -1
+    var uid: String = ""
     var email: String = ""
     var invoice: String = ""
     var isConfirmed: Bool = false
     var isCompleted: Bool = false
     var isPaid: Bool = false
+    var isCanceled: Bool = false
+    var cancelReason: String = ""
+    var numAppt: Int = 0
     var nextAppointment: Date = Date()
     
-    static var `default`: Appointment = Appointment(id: -1,
+    static var `default`: Appointment = Appointment(uid: "abc123",
                                                     email: "new_profile@email.com",
-                                                    invoice: StripeLink.hund.rawValue,
+                                                    invoice: StripeLink.zero.rawValue,
                                                     isConfirmed: false,
                                                     isCompleted: false,
                                                     isPaid: false,
+                                                    isCanceled: false,
+                                                    cancelReason: "",
+                                                    numAppt: 0,
                                                     nextAppointment: Date())
 
     enum StripeLink: String, CaseIterable, Identifiable {
-        case custom = "0"
-        case hund = "https://checkout.stripe.com/pay/cs_live_a18agieXo53jtxINTkyulMRiO4j85TzXfGhOxtY7SyptfkWMMUFzZIxfMm#fidkdWxOYHwnPyd1blppbHNgWjA0TVQ9TDdERlI1TDJTZnx0PElzUDJMS1FXfGxBPFQ3REZEdURQb2tCPXNdbEg3M0N9PDFvaE5mTTRramNMR19PbF1nTUs8YEdvajYyXUNEXUQ3cUE8aX11NTVxdGRNMn1jdCcpJ3VpbGtuQH11anZgYUxhJz8nPERUPX1AZEBsPVM1NG1gZEBAJykndXdgaWpkYUNqa3EnPydGbWRud2QlVWBxZm0neCUl"
-        case hundHalf = "2"
-        case twoHund = "3"
-        case threeHund = "4"
+        case zero = "$0"
+        case hundred = "$100"
+        //case hundred = "https://checkout.stripe.com/pay/cs_live_a18agieXo53jtxINTkyulMRiO4j85TzXfGhOxtY7SyptfkWMMUFzZIxfMm#fidkdWxOYHwnPyd1blppbHNgWjA0TVQ9TDdERlI1TDJTZnx0PElzUDJMS1FXfGxBPFQ3REZEdURQb2tCPXNdbEg3M0N9PDFvaE5mTTRramNMR19PbF1nTUs8YEdvajYyXUNEXUQ3cUE8aX11NTVxdGRNMn1jdCcpJ3VpbGtuQH11anZgYUxhJz8nPERUPX1AZEBsPVM1NG1gZEBAJykndXdgaWpkYUNqa3EnPydGbWRud2QlVWBxZm0neCUl"
+        case hundredFifty = "$150"
+        case twoHundred = "$200"
+        case threeHundred = "$300"
 
         var id: String { rawValue }
     }
@@ -39,11 +46,15 @@ struct Appointment: Decodable {
 extension Appointment {
     
     enum CodingKeys: String, CodingKey {
+        case uid
         case email
         case invoice
         case isConfirmed
         case isCompleted
         case isPaid
+        case isCanceled
+        case cancelReason
+        case numAppt
         case nextAppointment
     }
 
@@ -53,13 +64,17 @@ extension Appointment {
         return f!
     }
 
-    init(from decoder: Decoder, email: String, invoice: String, isConfirmed: Bool, isCompleted: Bool, isPaid: Bool, nextAppointment: Date) throws {
+    init(from decoder: Decoder, id: Int, uid: String, email: String, invoice: String, isConfirmed: Bool, isCompleted: Bool, isPaid: Bool, isCanceled: Bool, cancelReason: String, numAppt: Int, nextAppointment: Date) throws {
         // let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.uid = uid
         self.email = email
         self.invoice = invoice
         self.isConfirmed = isConfirmed
         self.isCompleted = isCompleted
         self.isPaid = isPaid
+        self.isCanceled = isCanceled
+        self.cancelReason = cancelReason
+        self.numAppt = numAppt
         self.nextAppointment = nextAppointment
     }
 }

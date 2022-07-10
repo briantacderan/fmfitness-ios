@@ -4,7 +4,7 @@
 //
 //  Created by Brian Tacderan on 1/17/22.
 //
-
+/*
 import XCTest
 
 class fmfitnessUITestsLaunchTests: XCTestCase {
@@ -30,3 +30,4 @@ class fmfitnessUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+*/

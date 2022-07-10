@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "shoulders-arms.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "shoulders-arms.png",
+      "filename" : "shoulders-arms@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "shoulders-arms@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

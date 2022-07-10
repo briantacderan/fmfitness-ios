@@ -11,7 +11,6 @@ import GoogleSignIn
 
 /// A class conforming to `ObservableObject` used to represent a user's authentication status.
 final class AuthenticationViewModel: ObservableObject {
-    
     static var shared = AuthenticationViewModel()
     
     /// The user's log in status.
@@ -55,8 +54,7 @@ final class AuthenticationViewModel: ObservableObject {
         authenticator.signOut()
         authenticator.disconnect()
     }
-
-    /// Adds the requested birthday read scope.
+    
     /// - parameter completion: An escaping closure that is called upon successful completion.
     func addProfileReadScope(completion: @escaping () -> Void) {
         authenticator.addProfileReadScope(completion: completion)

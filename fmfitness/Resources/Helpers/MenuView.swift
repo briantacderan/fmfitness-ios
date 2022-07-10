@@ -9,84 +9,120 @@ import SwiftUI
 import Firebase
 import GoogleSignIn
 
+
 struct MenuView: View {
     
-    @ObservedObject var firestore = FirestoreManager.shared
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.controller) var controller
+    
     @ObservedObject var authViewModel = AuthenticationViewModel.shared
+    @ObservedObject var firestore = FirestoreManager.shared
     
     private var user: GIDGoogleUser? {
         return GIDSignIn.sharedInstance.currentUser
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Capsule()
-                    .fill(Color("csf-accent"))
-                    .frame(width: 75, height: 5)
-                    .padding(10)
-                
-                Image("fmf-logo-white")
-                    .renderingMode(.template)
-                    .resizable()
-                    .foregroundColor(Color("csf-accent"))
-                    .frame(width: UIScreen.main.bounds.width*2/3, height: 50)
-                    .padding(.top, 30)
-                
-                VStack(alignment: .trailing, spacing: 30) {
+        VStack {
+            ScrollView {
+                VStack {
+                    LogoView(logoWidth: 100, logoHeight: 20, vertPadding: 50)
+                    
+                    VStack(alignment: .center, spacing: 50) {
 
-                    if user != nil || firestore.profile._username != "new_profile" {
-                        VStack(alignment: .trailing, spacing: 5) {
-                            Text("\(firestore.profile._username!)")
-                                .font(Font.custom("rajdhani", size: 15))
-                                .fontWeight(.semibold)
+                        if user != nil || firestore.profile._username != "new_profile" {
+                            VStack(alignment: .trailing, spacing: 3) {
+                                Text("\(firestore.profile._username!)")
+                                    .font(Font.custom("Rajdhani-Medium", size: 15))
+                                    .foregroundColor(Color("csb-choice"))
+                                    .fontWeight(.bold)
+                                
+                                Button {
+                                    withAnimation {
+                                        signOut()
+                                    }
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "pip.exit")
+                                            .font(.system(size: 10))
+                                        Spacer()
+                                        Text("Log Out")
+                                    }
+                                }
+                            }
                             
                             Button {
-                                withAnimation {
-                                    firestore.profile._username = "new_profile"
-                                    firestore.menuShow.toggle()
-                                    signOut()
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    if firestore.currentPage == .startPage {
+                                        // biometric.authRedirect = .welcomePage
+                                        controller.next(newPage: .homePage)
+                                    } else {
+                                        firestore.selection = .home
+                                    }
                                 }
                             } label: {
-                                Text("Log Out")
+                                HStack {
+                                    Image(systemName: "list.dash.header.rectangle")
+                                        .font(.system(size: 10))
+                                    Spacer()
+                                    Text("Home")
+                                }
+                            }
+                        } else {
+                            Button {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    firestore.authRedirect = .loginPage
+                                    firestore.showSidebar = false
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "pip.enter")
+                                        .font(.system(size: 10))
+                                    Spacer()
+                                    Text("Log In")
+                                }
                             }
                         }
                         
                         Button {
-                            withAnimation {
-                                firestore.next(newPage: .homePage)
-                                firestore.menuShow.toggle()
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                firestore.authRedirect = .welcomePage
+                                if firestore.currentPage != .startPage {
+                                    controller.next(newPage: .startPage)
+                                }
+                                firestore.showSidebar = false
                             }
                         } label: {
-                            Text("Home")
-                        }
-                    } else {
-                        Button {
-                            withAnimation {
-                                firestore.next(newPage: .loginPage)
-                                firestore.menuShow.toggle()
+                            HStack {
+                                Image(systemName: "chart.xyaxis.line")
+                                    .font(.system(size: 10))
+                                Spacer()
+                                Text("About")
                             }
-                        } label: {
-                            Text("Log In")
                         }
-                    }
-                    
-                    Button {
-                        withAnimation {
-                            firestore.next(newPage: .welcomePage)
-                            firestore.menuShow.toggle()
-                        }
-                    } label: {
-                        Text("About")
                     }
                 }
-                .padding(30)
-                .font(Font.custom("BebasNeue", size: 50))
-            .frame(width: UIScreen.main.bounds.width, alignment: .trailing)
+                .padding()
+                .font(Font.custom("BebasNeue", size: 25))
+                .frame(width: 125, alignment: .trailing)
+            }
+            
+            Spacer()
+            HStack {
+                Spacer()
+                
+                HStack(spacing: 0) {
+                    Text("©")
+                    Text("FM")
+                        .font(Font.custom("BebasNeue", size: 12))
+                    Text("FITNESS")
+                        .font(Font.custom("Rajdhani-Light", size: 12))
+                }
+                .padding(10)
             }
         }
-        .foregroundColor(Color("csf-main"))
-        .background(Color("csb-main"))
+        .foregroundColor(Color("csb-main"))
+        .background(colorScheme == .dark ? Color("csb-menu-gray") : Color("DA1-blue"))
     }
     
     func signOut() {
@@ -103,7 +139,10 @@ struct MenuView: View {
             print("Error signing out: %@", signOutError)
         }
         withAnimation {
-            firestore.next(newPage: .loginPage)
+            firestore.authRedirect = .loginPage
+            if firestore.currentPage != .startPage {
+                controller.next(newPage: .startPage)
+            }
         }
     }
 }

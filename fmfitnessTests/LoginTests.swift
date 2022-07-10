@@ -5,15 +5,17 @@
 //  Created by Brian Tacderan on 2/21/22.
 //
 
+/*
 import XCTest
 import SwiftUI
 // import GoogleSignIn
-@testable import fmfitness
+
+@testable import fm_fitness
 
 class LoginTests: XCTestCase {
     
-    var firestore = FirestoreManager()
-    var authViewModel = AuthenticationViewModel()
+    //var firestore = FirestoreManager()
+    //var authViewModel = AuthenticationViewModel()
     
     var signInProcessing = false
     var signInErrorMessage = ""
@@ -49,4 +51,4 @@ class LoginTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-}
+}*/

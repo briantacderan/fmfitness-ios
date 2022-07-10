@@ -9,15 +9,11 @@ import Foundation
 import SwiftUI
 import UIKit
 import Firebase
+import FirebaseAnalytics
 import GoogleSignIn
 import Stripe
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    let tabBar = UITabBar.appearance()
-    let tab = UITabBarAppearance()
-    let navBar = UINavigationBar.appearance()
-    
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -28,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         FirebaseApp.configure()
+        Analytics.setAnalyticsCollectionEnabled(false)
         return true
     }
 
@@ -96,21 +93,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Application Appearance
     private func configureApplicationAppearance() {
-        tab.configureWithOpaqueBackground()
-        // tab.backgroundColor = UIColor(Color("csb-main"))
-        tab.stackedLayoutAppearance.normal.iconColor = UIColor.lightGray
-        tab.stackedLayoutAppearance.selected.iconColor = UIColor(Color("csf-accent"))
         
+        let tabBar = UITabBar.appearance()
+        let tab = UITabBarAppearance()
+        let navBar = UINavigationBar.appearance()
+        
+        tab.configureWithTransparentBackground()
+        // tab.backgroundColor = UIColor(Color("csb-main"))
+        tab.stackedLayoutAppearance.normal.iconColor = UIColor(Color("csf-menu-gray"))
+        tab.stackedLayoutAppearance.selected.iconColor = UIColor(Color("csf-menu"))
         tabBar.scrollEdgeAppearance = tab
         tabBar.standardAppearance = tab
         tabBar.clipsToBounds = true
         
-        navBar.tintColor = .systemOrange
-        navBar.barTintColor = UIColor(Color("csb-main"))
+        /*tab.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .font : UIFont(name: "BebasNeue", size: 12)!,
+            .foregroundColor : UIColor(Color("csf-main-gray")) //UIColor.lightGray
+        ]
+        tab.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .font : UIFont(name: "BebasNeue", size: 12)!,
+            .foregroundColor : UIColor(Color("csf-menu"))
+        ]
+         
+        navBar.barTintColor = UIColor.gray //(Color("B1-red"))
+        navBar.backgroundColor = UIColor.clear
+         
+        navBar.setBackgroundImage(UIImage(contentsOfFile: "LaunchBlackTile"),
+                                   for: UIBarMetrics(rawValue: 1)!) */
+        
+        navBar.tintColor = UIColor(Color("csb-main"))
+        navBar.isTranslucent = true
         
         // NavigationBarTitle
         navBar.largeTitleTextAttributes = [
-            .font : UIFont(name: "BebasNeue", size: 40)!,
+            .font : UIFont(name: "Rajdhani-Light", size: 45)!,
             .foregroundColor : UIColor(Color("csf-main"))
         ]
         
@@ -121,6 +137,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         
         // Allow NavigationView to set background color
-        UITableView.appearance().backgroundColor = UIColor(Color("csb-main"))
+        UITableView.appearance().backgroundColor = UIColor(Color("csb-gray"))
     }
 }

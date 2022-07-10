@@ -11,16 +11,19 @@ import SwiftUI
 struct ProfileImageView: View {
     
     @ObservedObject var imageLoader: ProfileImageLoader
+    
+    var frameSize: CGFloat
 
-    init(profile: GIDProfileData) {
+    init(profile: GIDProfileData, frameSize: CGFloat) {
         self.imageLoader = ProfileImageLoader(profile: profile)
+        self.frameSize = frameSize
     }
 
     var body: some View {
         Image(uiImage: imageLoader.image)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 155, height: 155, alignment: .center)
+            .frame(width: frameSize, height: frameSize, alignment: .center)
             .scaledToFit()
             .clipShape(Circle())
             .accessibilityLabel(Text("Profile image."))

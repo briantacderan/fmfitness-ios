@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
+    @ObservedObject var firestore = FirestoreManager.shared
     @State var showSplash = true
     
     var body: some View {
@@ -17,8 +18,9 @@ struct SplashView: View {
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         SplashScreen.shouldAnimate = false
-                        withAnimation() {
+                        withAnimation(.easeOut(duration: 0.5)) {
                             self.showSplash = false
+                            firestore.isFresh = false
                         }
                     }
                 }
@@ -34,7 +36,7 @@ struct SplashView_Previews : PreviewProvider {
 }
 
 struct SplashScreen: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.colorScheme) var colorScheme
     
     static var shouldAnimate = true
     let csf = Color("LaunchScreenColorTile")
@@ -54,14 +56,20 @@ struct SplashScreen: View {
     @State var textScale: CGFloat = 1
     @State var coverCircleScale: CGFloat = 1
     @State var coverCircleAlpha = 0.0
-    @State var coverAlpha = 0.1
+    @State var coverAlpha = 0.05
 
     var body: some View {
         ZStack {
             Image("LaunchBlackTile")
-                .resizable()
                 .renderingMode(.template)
                 .foregroundColor(csf)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .opacity(coverAlpha)
+            
+            Image("LaunchBlackTile")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Color("csb-gray"))
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 .aspectRatio(1, contentMode: .fit)
                 .opacity(coverAlpha)
@@ -127,14 +135,14 @@ extension SplashScreen {
         withAnimation(.easeIn(duration: uAnimationDuration)) {
             percent = 1
             uScale = 5
-            lineScale = 2
+            lineScale = 1.5
         }
         
-        withAnimation(Animation.easeIn(duration: uAnimationDuration).delay(0.55)) {
+        withAnimation(.easeIn(duration: uAnimationDuration).delay(1)) {
             coverAlpha = 0.8
         }
     
-        withAnimation(Animation.easeIn(duration: uAnimationDuration).delay(1.2)) {
+        withAnimation(.easeIn(duration: uAnimationDuration).delay(1.4)) {
             textAlpha = 1.0
         }
     
@@ -207,5 +215,87 @@ struct ExpandingCircle: Shape {
     var animatableData: Double {
         get { return percent }
         set { percent = newValue }
+    }
+}
+
+struct FitnessButton: View {
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var firestore = FirestoreManager.shared
+    
+    static var isExtruded = true
+    static var isReleased = false
+    static var staticAlpha = 1.0
+    
+    let csf = Color("csf-main-str")
+    let csb = Color("LaunchScreenColor")
+    let UIWidth = UIScreen.main.bounds.width
+    let UIHeight = UIScreen.main.bounds.height*1.5
+    let logoWidth = UIScreen.main.bounds.width*0.9
+    let logoHeight = 78
+    let dropHeight = 75
+    let splashDelay = SplashScreen.shouldAnimate ? 3.0 : 30.0
+    
+    let image = Image("fmf-logo-iso-2")
+
+    @State var buttonDepth = 75.0
+    @State var buttonLight = 0.15
+    @State var buttonAlpha = 1.0
+    @State var coverAlpha = 0.05
+    
+    init() {
+        SplashScreen.shouldAnimate = false
+    }
+
+    var body: some View {
+        ZStack {
+            if FitnessButton.isReleased {
+                SplashView()
+            }
+            
+            IsometricView(active: true,
+                          extruded: true,
+                          depth: buttonDepth) {
+                image
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: logoWidth, height: 78)
+                    .scaleEffect(1)
+                    .foregroundColor(csf)
+                    .padding()
+                    .frame(width: logoWidth, height: 75)
+                    .scaledToFit()
+                    .background(csb)
+                    .brightness(buttonLight)
+            }
+            .frame(width: UIWidth,
+                   height: UIHeight)
+            .background(csb)
+            .offset(y: 75.0-buttonDepth)
+            .opacity(buttonAlpha)
+            //.preferredColorScheme(.dark)
+            .pressAction {
+                withAnimation(.easeIn(duration: 0.15)) {
+                    self.buttonDepth = 20.0
+                    self.buttonLight = -0.3
+                }
+            } onRelease: {
+                withAnimation(.spring()) {
+                    self.buttonDepth = 50.0
+                    self.buttonLight = 0.0
+                    let deadline: DispatchTime = .now() + 1.0
+                    DispatchQueue.main.asyncAfter(deadline: deadline) {
+                        FitnessButton.isReleased = true
+                        SplashScreen.shouldAnimate = true
+                        withAnimation(.easeIn(duration: 0.5)) {
+                            self.buttonAlpha = 0.0
+                            self.buttonDepth = 75.0
+                        }
+                        withAnimation(.easeIn(duration: 3.0)) {
+                            FitnessButton.staticAlpha = 0.0
+                        }
+                    }
+                }
+            }
+        }
     }
 }
