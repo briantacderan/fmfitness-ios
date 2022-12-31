@@ -17,7 +17,6 @@ struct HeaderView: View {
             .font(Font.custom("Rajdhani-Bold", size: fontSize))
             .textCase(.uppercase)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color("csb-main"))
     }
 }
 

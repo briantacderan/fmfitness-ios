@@ -21,9 +21,6 @@ enum BiometricType {
 final class PageController: ObservableObject {
     static var shared = PageController()
     
-    @Environment(\.isPresented) var isPresented
-    @Environment(\.dismiss) private var dismiss
-    
     @ObservedObject var firestore = FirestoreManager.shared
     
     let context = LAContext()
@@ -210,9 +207,6 @@ final class PageController: ObservableObject {
         self.firestore.showSidebar = false
         self.firestore.showProfile = false
         withAnimation(.easeInOut(duration: 0.25)) {
-            if isPresented {
-                dismiss()
-            }
             self.firestore.currentPage = newPage
         }
     }
@@ -546,9 +540,7 @@ final class PageController: ObservableObject {
                 
         if (((params["cancel"]! as! Bool) && !focus.isCanceled && focus.isConfirmed && !focus.isPaid) || (!(params["confirm"]! as! Bool) && focus.isConfirmed) || ((params["paid"]! as! Bool) && !focus.isPaid && ((params["mode"]! as! String) == "edit"))) {
             newBalance -= intInvoice
-        }
-    
-        if (((params["confirm"]! as! Bool) && !focus.isConfirmed) || ((params["mode"]! as! String) == "add") || (!(params["paid"]! as! Bool) && focus.isPaid && ((params["mode"]! as! String) == "edit"))) {
+        } else if (((params["confirm"]! as! Bool) && !focus.isConfirmed) || ((params["mode"]! as! String) == "add") || (!(params["paid"]! as! Bool) && focus.isPaid && ((params["mode"]! as! String) == "edit"))) {
             newBalance += intInvoice
             if (((params["mode"]! as! String) == "add") && focus.isConfirmed && !focus.isCanceled && !focus.isPaid) {
                 let oldInvoice: Int = Int(focus.invoice.replacingOccurrences(of: "$", with: "")) ?? 0

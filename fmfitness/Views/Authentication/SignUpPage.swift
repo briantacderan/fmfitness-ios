@@ -154,16 +154,16 @@ struct SignUpPage_Previews: PreviewProvider {
 struct SignUpHeader: View {
     var body: some View {
         HStack {
-            Text("New")
+            Text("Create new")
             
             HStack(spacing: 0) {
                 Text("FM")
                     .foregroundColor(.black)
                     .font(Font.custom("BebasNeue", size: 35))
-                Text("ACCOUNT")
+                Text("account")
             }
         }
-        .font(Font.custom("Rajdhani-Light", size: 35))
+        .font(Font.custom("Rajdhani-Light", size: 30))
         .padding(.bottom, 20)
     }
 }

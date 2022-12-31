@@ -20,8 +20,6 @@ struct ActiveApptView: View {
                             NSItemProvider(object: item)
                         }
                 }
-                .background(Color("csb-main"))
-                .listRowBackground(Color("csb-main"))
                 .listRowSeparator(.hidden)
                 .frame(height: 28)
             }
@@ -34,8 +32,6 @@ struct ActiveApptView: View {
         } footer: {
             FooterView(title: "Unconfirmed:", count: firestore.activeCount)
         }
-        .background(Color("csb-main"))
-        .listRowBackground(Color("csb-main"))
         .listRowSeparator(.hidden)
     }
 }

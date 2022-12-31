@@ -60,7 +60,6 @@ struct AdminView: View {
                             .onDrop(
                               of: [TodoItem.typeIdentifier],
                               delegate: ApptDropDelegate(focusId: $focusId))
-                        
                     }
                     .frame(height: UIScreen.height/4)
                         
@@ -72,7 +71,6 @@ struct AdminView: View {
                             List {
                                 if (firestore.sort != 1) {
                                     ActiveApptView()
-                                        .background(Color("csb-main"))
                                         .onDrop(of: [TodoItem.typeIdentifier], isTargeted: nil) { apptProviders in
                                             for apptProvider in apptProviders {
                                                 apptProvider.loadObject(ofClass: TodoItem.self) { todoItem, _ in
@@ -89,7 +87,6 @@ struct AdminView: View {
                                 }
                                 
                                 ConfirmedApptView()
-                                    .background(Color("csb-main"))
                                     .onDrop(of: [TodoItem.typeIdentifier], isTargeted: nil) { apptProviders in
                                         for apptProvider in apptProviders {
                                             apptProvider.loadObject(ofClass: TodoItem.self) { todoItem, _ in
@@ -107,7 +104,6 @@ struct AdminView: View {
                                 
                                 if (firestore.sort > 0) {
                                     CompletedApptView()
-                                        .background(Color("csb-main"))
                                         .onDrop(of: [TodoItem.typeIdentifier], isTargeted: nil) { apptProviders in
                                             for apptProvider in apptProviders {
                                                 apptProvider.loadObject(ofClass: TodoItem.self) { todoItem, _ in
@@ -131,18 +127,18 @@ struct AdminView: View {
                             }
                         }
                         .frame(height: UIScreen.main.bounds.height*3/4)
-                        .background(Color("csb-main"))
+                        .background(Color("csb-main-str"))
                         
                         Color("csf-main")
-                            .blur(radius: 3)
-                            .frame(width: UIScreen.width*1.025, height: 6)
-                            .offset(y: -6)
+                            .blur(radius: 5)
+                            .frame(width: UIScreen.width*1.025, height: 2)
+                            .offset(y: -2)
                         
                         Color("DA1-blue")
                             .frame(width: UIScreen.width, height: 6)
                     }
-                    .frame(height: UIScreen.height*3/4)
-                    .background(Color("csb-main"))
+                    .frame(height: UIScreen.height*0.7)
+                    .background(Color("csb-main-str"))
                 }
                 .foregroundColor(Color("csf-main"))
                 .frame(width: UIScreen.width,
@@ -152,10 +148,10 @@ struct AdminView: View {
                     ZStack {
                         Color.gray
                         Image("LaunchBlackTile")
-                                .renderingMode(.template)
-                                .foregroundColor(Color("csf-main"))
-                                .opacity(1)
-                                .ignoresSafeArea()
+                            .renderingMode(.template)
+                            .foregroundColor(Color("csf-main"))
+                            .opacity(0.04)
+                            .ignoresSafeArea()
                     }
                 )
                 .toolbar {
@@ -265,6 +261,8 @@ struct AdminView: View {
                         }
                         withAnimation(.easeInOut(duration: 0.2)) {
                             Color("csb-main-str")
+                                .opacity(1)
+                                .blur(radius: 20)
                                 .frame(width: UIScreen.width,
                                        height: UIScreen.height)
                                 .opacity(isShowingAddApptView ? 0.6 : 0)

@@ -134,7 +134,7 @@ struct AddApptView: View {
             }
         }
         .frame(width: UIScreen.width,
-               height: UIScreen.height/3)
+               height: UIScreen.height/2)
         .environment(\.layoutDirection, .rightToLeft)
         .flipsForRightToLeftLayoutDirection(true)
         .background(

@@ -20,8 +20,6 @@ struct CompletedApptView: View {
                             NSItemProvider(object: item)
                         }
                 }
-                .listRowBackground(Color("csb-main"))
-                .listRowSeparator(.hidden)
                 .frame(height: 28)
             }
             .onDelete { controller.deleteCompletedAppts(atOffsets: $0) }

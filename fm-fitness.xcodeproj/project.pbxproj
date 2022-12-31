@@ -51,8 +51,6 @@
 		F29CF8FD27E5BFF70089F934 /* Rajdhani-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29CF8F727E5BFF70089F934 /* Rajdhani-Regular.ttf */; };
 		F29CF90127E5C01E0089F934 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F29CF8FF27E5C01E0089F934 /* BebasNeue-Regular.ttf */; };
 		F2A15A2827A16DC20019B934 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A15A2727A16DC20019B934 /* AppDelegate.swift */; };
-		F2B03D5A27DDE63000A1E04F /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = F2B03D5927DDE63000A1E04F /* Stripe */; };
-		F2B03D5C27DDE63000A1E04F /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = F2B03D5B27DDE63000A1E04F /* StripeApplePay */; };
 		F2B4B40C285C7CD4009B1BAB /* AuthenticationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B4B40B285C7CD4009B1BAB /* AuthenticationKey.swift */; };
 		F2B4B40E285C7D80009B1BAB /* ControllerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B4B40D285C7D80009B1BAB /* ControllerKey.swift */; };
 		F2C01C2A280E4F76003F04B5 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C01C29280E4F76003F04B5 /* TodoItem.swift */; };
@@ -73,6 +71,14 @@
 		F2D89F7A28150E290057A1DA /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7928150E290057A1DA /* AlertController.swift */; };
 		F2D89F7C281516620057A1DA /* FaceIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7B281516620057A1DA /* FaceIdentifier.swift */; };
 		F2D89F80281659990057A1DA /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D89F7F281659990057A1DA /* SplashView.swift */; };
+		F2D98C43295E67C9008D548C /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C42295E67C9008D548C /* Stripe */; };
+		F2D98C45295E67C9008D548C /* StripeCardScan in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C44295E67C9008D548C /* StripeCardScan */; };
+		F2D98C47295E67C9008D548C /* StripeFinancialConnections in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C46295E67C9008D548C /* StripeFinancialConnections */; };
+		F2D98C49295E67C9008D548C /* StripeIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C48295E67C9008D548C /* StripeIdentity */; };
+		F2D98C4B295E67C9008D548C /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C4A295E67C9008D548C /* StripePaymentSheet */; };
+		F2D98C4D295E67C9008D548C /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C4C295E67C9008D548C /* StripePayments */; };
+		F2D98C4F295E67C9008D548C /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C4E295E67C9008D548C /* StripePaymentsUI */; };
+		F2D98C51295E67F6008D548C /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = F2D98C50295E67F6008D548C /* StripeApplePay */; };
 		F2E3385127955C9F006044E0 /* fmfitnessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3385027955C9F006044E0 /* fmfitnessApp.swift */; };
 		F2E3385527955CA0006044E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E3385427955CA0006044E0 /* Assets.xcassets */; };
 		F2E3385827955CA0006044E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E3385727955CA0006044E0 /* Preview Assets.xcassets */; };
@@ -190,15 +196,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F298FA79281FC03D00DC7E50 /* FirebaseMessaging in Frameworks */,
-				F2B03D5A27DDE63000A1E04F /* Stripe in Frameworks */,
+				F2D98C51295E67F6008D548C /* StripeApplePay in Frameworks */,
+				F2D98C4B295E67C9008D548C /* StripePaymentSheet in Frameworks */,
 				F298FA73281FC03D00DC7E50 /* FirebaseAuth in Frameworks */,
+				F2D98C4F295E67C9008D548C /* StripePaymentsUI in Frameworks */,
 				F298FA7B281FC03D00DC7E50 /* FirebaseStorage in Frameworks */,
+				F2D98C49295E67C9008D548C /* StripeIdentity in Frameworks */,
+				F2D98C47295E67C9008D548C /* StripeFinancialConnections in Frameworks */,
 				F28A753027F83384005FDA3F /* Alamofire in Frameworks */,
 				F298FA77281FC03D00DC7E50 /* FirebaseFunctions in Frameworks */,
-				F2B03D5C27DDE63000A1E04F /* StripeApplePay in Frameworks */,
 				F298FA71281FC03D00DC7E50 /* FirebaseAnalytics in Frameworks */,
 				F258191C27DD9D34000F74FA /* GoogleSignIn in Frameworks */,
 				F298FA75281FC03D00DC7E50 /* FirebaseFirestore in Frameworks */,
+				F2D98C45295E67C9008D548C /* StripeCardScan in Frameworks */,
+				F2D98C4D295E67C9008D548C /* StripePayments in Frameworks */,
+				F2D98C43295E67C9008D548C /* Stripe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +355,13 @@
 			path = Administration;
 			sourceTree = "<group>";
 		};
+		F2D98C3E295E6437008D548C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F2E3384427955C9F006044E0 = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +370,7 @@
 				F2E3386027955CA0006044E0 /* fmfitnessTests */,
 				F2E3386A27955CA0006044E0 /* fmfitnessUITests */,
 				F2E3384E27955C9F006044E0 /* Products */,
+				F2D98C3E295E6437008D548C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -486,8 +506,6 @@
 			name = "fm-fitness";
 			packageProductDependencies = (
 				F258191B27DD9D34000F74FA /* GoogleSignIn */,
-				F2B03D5927DDE63000A1E04F /* Stripe */,
-				F2B03D5B27DDE63000A1E04F /* StripeApplePay */,
 				F28A752F27F83384005FDA3F /* Alamofire */,
 				F298FA70281FC03D00DC7E50 /* FirebaseAnalytics */,
 				F298FA72281FC03D00DC7E50 /* FirebaseAuth */,
@@ -495,6 +513,14 @@
 				F298FA76281FC03D00DC7E50 /* FirebaseFunctions */,
 				F298FA78281FC03D00DC7E50 /* FirebaseMessaging */,
 				F298FA7A281FC03D00DC7E50 /* FirebaseStorage */,
+				F2D98C42295E67C9008D548C /* Stripe */,
+				F2D98C44295E67C9008D548C /* StripeCardScan */,
+				F2D98C46295E67C9008D548C /* StripeFinancialConnections */,
+				F2D98C48295E67C9008D548C /* StripeIdentity */,
+				F2D98C4A295E67C9008D548C /* StripePaymentSheet */,
+				F2D98C4C295E67C9008D548C /* StripePayments */,
+				F2D98C4E295E67C9008D548C /* StripePaymentsUI */,
+				F2D98C50295E67F6008D548C /* StripeApplePay */,
 			);
 			productName = fmfitness;
 			productReference = F2E3384D27955C9F006044E0 /* fm-fitness.app */;
@@ -573,9 +599,9 @@
 			mainGroup = F2E3384427955C9F006044E0;
 			packageReferences = (
 				F258191A27DD9D33000F74FA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */,
 				F28A752E27F83384005FDA3F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F298FA6F281FC03C00DC7E50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 			);
 			productRefGroup = F2E3384E27955C9F006044E0 /* Products */;
 			projectDirPath = "";
@@ -881,6 +907,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fmfitness/Resources/Properties/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "FM Fitness";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID instead of a password to access your account.";
 				INFOPLIST_KEY_NSMainNibFile = MainWindow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -920,6 +947,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = fmfitness/Resources/Properties/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "FM Fitness";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID instead of a password to access your account.";
 				INFOPLIST_KEY_NSMainNibFile = MainWindow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1109,12 +1137,12 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
+		F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stripe/stripe-ios";
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
 			requirement = {
-				kind = exactVersion;
-				version = 21.12.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 23.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1160,14 +1188,44 @@
 			package = F298FA6F281FC03C00DC7E50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
-		F2B03D5927DDE63000A1E04F /* Stripe */ = {
+		F2D98C42295E67C9008D548C /* Stripe */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
 			productName = Stripe;
 		};
-		F2B03D5B27DDE63000A1E04F /* StripeApplePay */ = {
+		F2D98C44295E67C9008D548C /* StripeCardScan */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F2B03D5827DDE63000A1E04F /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeCardScan;
+		};
+		F2D98C46295E67C9008D548C /* StripeFinancialConnections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeFinancialConnections;
+		};
+		F2D98C48295E67C9008D548C /* StripeIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeIdentity;
+		};
+		F2D98C4A295E67C9008D548C /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentSheet;
+		};
+		F2D98C4C295E67C9008D548C /* StripePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePayments;
+		};
+		F2D98C4E295E67C9008D548C /* StripePaymentsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentsUI;
+		};
+		F2D98C50295E67F6008D548C /* StripeApplePay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2D98C41295E67C9008D548C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
 			productName = StripeApplePay;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -110,6 +110,7 @@ struct SchedulerView: View {
                                             Button {
                                                 withAnimation(.easeInOut(duration: 0.35)) {
                                                     firestore.induceShade.toggle()
+                                                    controller.fetchTraining(for: firestore.profile.email)
                                                     AlertController().permitCancel()
                                                 }
                                             } label: {
@@ -297,7 +298,7 @@ struct SchedulerView: View {
                                             
                                             HStack {
                                                 if let timeTable = scheduler.timeFinal.components(separatedBy: ", ") {
-                                                    ForEach(timeTable.indices) { (index: Int) in
+                                                    ForEach(timeTable.indices, id: \.self) { (index: Int) in
                                                         if index == 0 {
                                                             Text("\(String(timeTable[index].prefix(3))),")
                                                         } else if index == 1 {
@@ -324,7 +325,7 @@ struct SchedulerView: View {
                                                             // .foregroundColor(.clear)
                                                     }
                                                     .cornerRadius(10)
-                                                    .aspectRatio(1, contentMode: .fit)
+                                                    .aspectRatio(1, contentMode: .fill)
                                                 }
                                             }
                                             
@@ -479,7 +480,7 @@ struct SchedulerView: View {
                     }
                     .transition(.opacity)
                 )
-                .offset(y: -60)
+                .offset(y: -40)
             }
         }.edgesIgnoringSafeArea(.all)
     }

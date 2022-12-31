@@ -10,8 +10,8 @@ import LocalAuthentication
 import SwiftUI
 
 class AlertController: UIViewController {
-    @Environment(\.controller) var controller
     
+    @ObservedObject var controller = PageController.shared
     @ObservedObject var firestore = FirestoreManager.shared
     
     let dateFormatter = DateFormatter()
@@ -123,8 +123,6 @@ class AlertController: UIViewController {
     }
     
     @IBAction func permitCancel() {
-        controller.fetchTraining(for: firestore.profile.email)
-        
         guard
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         else { return }
@@ -177,6 +175,53 @@ class AlertController: UIViewController {
     enum AuthenticationState {
         case loggedin, loggedout
     }
+    
+    /*func authenticateUser(completion: @escaping (String?) -> Void) {
+        guard controller.canEvaluatePolicy() else {
+            completion("Biometric ID not available")
+            return
+        }
+        
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Logging in with Biometric ID Authentication") { [weak self] (success, evaluateError) in
+            
+            if success {
+                DispatchQueue.main.async {
+                    self?.controller.next(newPage: Dashboard.homePage)
+                    withAnimation(.easeIn(duration: 0.2)) {
+                        AuthenticationView.hideMetric = 0
+                        AuthenticationView.lastHide = true
+                    }
+                    completion(nil)
+                }
+            } else {
+                let message: String
+                switch evaluateError {
+                case LAError.authenticationFailed?:
+                  message = "There was a problem verifying your identity."
+                case LAError.userCancel?:
+                  message = "You pressed cancel."
+                case LAError.userFallback?:
+                  message = "You pressed password."
+                case LAError.biometryNotAvailable?:
+                  message = "Face ID/Touch ID is not available."
+                case LAError.biometryNotEnrolled?:
+                  message = "Face ID/Touch ID is not set up."
+                case LAError.biometryLockout?:
+                  message = "Face ID/Touch ID is locked."
+                default:
+                  message = "Face ID/Touch ID may not be configured"
+                }
+                DispatchQueue.main.async {
+                    self?.firestore.authRedirect = Page.loginPage
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        AuthenticationView.hideMetric = 0
+                        AuthenticationView.lastHide = true
+                    }
+                    completion(evaluateError?.localizedDescription ?? message)
+                }
+            }
+        }
+    }*/
 
     /// The current authentication state.
     var state = AuthenticationState.loggedout {

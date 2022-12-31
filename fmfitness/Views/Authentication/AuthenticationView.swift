@@ -37,10 +37,10 @@ struct AuthenticationView: View {
                 .edgesIgnoringSafeArea(.all)
                 .opacity(AuthenticationView.lastHide ? 0 : 1)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         let canAuthBio = controller.canEvaluatePolicy()
                         if canAuthBio {
-                            AlertController().bioIDLoginAction()
+                            controller.bioIDLoginAction()
                         }
                     }
                 }

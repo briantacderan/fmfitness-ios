@@ -20,8 +20,6 @@ struct ConfirmedApptView: View {
                             NSItemProvider(object: item)
                         }
                 }
-                .listRowBackground(Color("csb-main"))
-                .listRowSeparator(.hidden)
                 .frame(height: 28)
             }
             .onDelete { controller.deleteConfirmedAppts(atOffsets: $0) }

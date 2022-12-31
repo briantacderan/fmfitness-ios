@@ -41,7 +41,7 @@ struct HomeView: View {
                             .offset(y: 35)
                         
                         Color.white
-                            .blur(radius: 3)
+                            .blur(radius: 4)
                             .frame(width: UIScreen.width*1.1, height: 6)
                             .offset(y: 24)
                         
@@ -69,8 +69,6 @@ struct HomeView: View {
                                         HStack {
                                             Text(firestore.profile.nextAppointment, style: .date)
                                                 .font(Font.custom("Rajdhani-Bold", size: 30))
-                                            Text("@")
-                                                .font(Font.custom("Rajdhani-Bold", size: 20))
                                             Text(firestore.profile.nextAppointment, style: .time)
                                                 .font(Font.custom("BebasNeue", size: 40))
                                                 .foregroundColor(Color("csf-accent"))
@@ -168,7 +166,7 @@ struct HomeView: View {
                         Image("LaunchBlackTile")
                                 .renderingMode(.template)
                                 .foregroundColor(Color("csf-main"))
-                                .opacity(0.03)
+                                .opacity(0.013)
                                 .ignoresSafeArea()
                     }
                 )
@@ -238,6 +236,7 @@ struct CategoryCard: View {
     
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.controller) var controller 
     
     @ObservedObject var firestore = FirestoreManager.shared
     
@@ -271,6 +270,7 @@ struct CategoryCard: View {
                     if categoryName == "Request Cancellation" {
                         withAnimation(.easeInOut(duration: 0.35)) {
                             firestore.induceShade.toggle()
+                            controller.fetchTraining(for: firestore.profile.email)
                             AlertController().permitCancel()
                         }
                     } else if categoryName == "Schedule Training" {

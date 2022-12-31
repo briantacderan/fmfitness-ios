@@ -12,8 +12,7 @@ import Firebase
 
 /// An observable class for authenticating via Google.
 final class GoogleSignInAuthenticator: ObservableObject {
-    @Environment(\.controller) var controller
-    
+    @ObservedObject var controller = PageController.shared
     @ObservedObject var authViewModel = AuthenticationViewModel.shared
     @ObservedObject var firestore = FirestoreManager.shared
     
@@ -80,8 +79,8 @@ final class GoogleSignInAuthenticator: ObservableObject {
     /// Signs out the current user.
     func signOut() {
         GIDSignIn.sharedInstance.signOut()
-        self.authViewModel.state = .signedOut
-        self.controller.next(newPage: Dashboard.startPage)
+        authViewModel.state = .signedOut
+        controller.next(newPage: Dashboard.startPage)
     }
 
     /// Adds the firestore read scope for the current user.
@@ -149,11 +148,12 @@ final class GoogleSignInAuthenticator: ObservableObject {
                 print("User signed in")
                 
                 guard
-                    let user = self.user
+                    let user = user
                 else { return }
                 
                 self.authViewModel.state = .signedIn(user)
                 self.firestore.firstLogin = true
+                
                 withAnimation {
                     self.controller.login(uid: res!.user.uid, email: user.profile!.email)
                 }

@@ -22,29 +22,32 @@ struct FocusApptView: View {
                 Text("Current Focus")
                 AppointmentView(appt: focus)
             } else {
-                Text("DRAG HERE")
-                    .font(Font.custom("Rajdhani-Bold", size: 12))
-                    .foregroundColor(Color("A2-teal"))
-                    .overlay(
-                        Text("DRAG HERE")
-                            .font(Font.custom("Rajdhani-Bold", size: 12))
-                            .foregroundColor(Color.black)
-                            .offset(x: 1, y: 1))
+                Text("DRAG      HERE")
+                    .font(Font.custom("BebasNeue", size: 30))
+                    .foregroundColor(Color("csb-gray-str"))
+                    .kerning(10)
+                    .opacity(0.6)
             }
         }
         .frame(maxWidth: .infinity)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 15)
-                .strokeBorder(Color("base-light"), style: StrokeStyle(dash: [10]))
-                .background(Color("csb-main")
-                                .opacity(0.5)
-                                .overlay(
-                                    Image("LaunchBlackTile")
-                                        .renderingMode(.template)
-                                        .resizable()
-                                        .aspectRatio(1, contentMode: .fill)
-                                        .opacity(0.1))))
+                .strokeBorder(Color("csf-accent-light").opacity(1.0), style: StrokeStyle(lineWidth: 4.0, dash: [10]))
+                .background(
+                    Image("LaunchBlackTile")
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: UIScreen.width*5, height: UIScreen.height*5)
+                        .aspectRatio(1, contentMode: .fill)
+                        .foregroundColor(Color("csf-menu-gray")) 
+                        .blur(radius: 0)
+                        .opacity(1)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15)
+                                .strokeBorder(Color("csb-gray").opacity(1))
+                                .background(Color("csb-gray").opacity(0.1)))))
+        //.frame(width: UIScreen.width*0.9, height: 40)
         //.onDrop(of: [TodoItem.typeIdentifier], delegate: dropDelegate)
     }
 }
@@ -122,3 +125,13 @@ var body: some View {
         }
     }
 }*/
+
+struct FocusApptView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            FocusApptView()
+                .environmentObject(FirestoreManager.shared)
+        }
+                //.preferredColorScheme(.dark)
+    }
+}
